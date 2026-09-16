@@ -662,16 +662,41 @@
     }
   }
 
+  const RECOGNITION_ERROR_MESSAGES = {
+    'not-allowed': 'Trang chưa được cấp quyền micro. Hãy vào phần cài đặt trang (biểu tượng ổ khóa cạnh URL) → Quyền → Micrô → Cho phép, rồi tải lại trang.',
+    'service-not-allowed': 'Trình duyệt chặn quyền dùng micro cho trang này. Kiểm tra lại cài đặt quyền micro của Chrome.',
+    'permission-denied': 'Bạn đã từ chối quyền micro trước đó. Hãy vào cài đặt trang để cấp lại quyền.',
+    'no-speech': 'Không phát hiện giọng nói. Hãy thử nói to và rõ hơn.',
+    'audio-capture': 'Không tìm thấy micro trên thiết bị. Kiểm tra xem micro có bị ứng dụng khác chiếm dụng không.',
+    'network': 'Lỗi kết nối mạng khi nhận diện giọng nói. Kiểm tra lại kết nối internet.',
+    'aborted': 'Quá trình ghi âm bị dừng giữa chừng.'
+  };
+
   function startRecording() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) { alert("Trình duyệt không hỗ trợ nhận diện giọng nói."); return; }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
     const statusEl = document.getElementById('pr-status');
     const feedbackEl = document.getElementById('pr-feedback');
+    feedbackEl.innerText = "";
 
-    statusEl.innerText = "Đang nghe... 🎧"; statusEl.className = "result-text"; feedbackEl.innerText = "";
+    if (!window.isSecureContext) {
+      statusEl.innerText = "Trang cần chạy qua HTTPS thì micro mới hoạt động.";
+      statusEl.className = "result-text text-danger";
+      return;
+    }
+    if (!SpeechRecognition) {
+      statusEl.innerText = "Trình duyệt này không hỗ trợ nhận diện giọng nói (Safari trên iPhone chưa hỗ trợ tính năng này).";
+      statusEl.className = "result-text text-danger";
+      return;
+    }
+
+    runRecognition(SpeechRecognition, statusEl, feedbackEl);
+  }
+
+  function runRecognition(SpeechRecognition, statusEl, feedbackEl) {
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+
+    statusEl.innerText = "Đang nghe... 🎧"; statusEl.className = "result-text";
 
     try { recognition.start(); }
     catch (e) { statusEl.innerText = "Không thể bắt đầu ghi âm."; statusEl.className = "result-text text-danger"; return; }
@@ -688,8 +713,9 @@
         statusEl.innerText = "Chưa chuẩn, thử lại nhé! ❌"; statusEl.className = "result-text text-danger";
       }
     };
-    recognition.onerror = () => {
-      statusEl.innerText = "Không nghe rõ, thử lại nhé."; statusEl.className = "result-text text-danger";
+    recognition.onerror = (event) => {
+      statusEl.innerText = RECOGNITION_ERROR_MESSAGES[event.error] || `Lỗi: ${event.error}`;
+      statusEl.className = "result-text text-danger";
     };
     recognition.onend = () => {
       if (statusEl.innerText === "Đang nghe... 🎧") {
