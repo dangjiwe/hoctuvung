@@ -679,19 +679,7 @@
       return;
     }
 
-    statusEl.innerText = "Đang xin quyền micro..."; statusEl.className = "result-text";
-
-    // Xin quyền micro trước bằng getUserMedia để đảm bảo hộp thoại cấp quyền
-    // luôn hiện ra trên Chrome Android trước khi bắt đầu nhận diện giọng nói.
-    navigator.mediaDevices.getUserMedia({ audio: true })
-      .then((stream) => {
-        stream.getTracks().forEach(track => track.stop()); // chỉ cần xin quyền, không cần giữ stream
-        runRecognition(SpeechRecognition, statusEl, feedbackEl);
-      })
-      .catch((err) => {
-        statusEl.innerText = RECOGNITION_ERROR_MESSAGES['not-allowed'];
-        statusEl.className = "result-text text-danger";
-      });
+    runRecognition(SpeechRecognition, statusEl, feedbackEl);
   }
 
   function runRecognition(SpeechRecognition, statusEl, feedbackEl) {
