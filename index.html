@@ -6,6 +6,7 @@
 <title>Sổ Tay Từ Vựng — Học Tiếng Anh</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
   :root {
     --bg: #16302B;
@@ -335,6 +336,15 @@
     <div id="manage-mode" class="mode-section">
       <h2>Từ vựng của tôi</h2>
       <p class="mode-sub">Các từ mặc định nằm trong <code>data.json</code>. Thêm từ riêng ở đây được lưu trong trình duyệt.</p>
+
+      <div style="margin-bottom: 20px; padding: 15px; border: 1px dashed var(--accent); border-radius: 8px; background: rgba(47, 122, 109, 0.05);">
+        <h3 style="margin-top:0; font-size: 15px; margin-bottom: 8px; color: var(--accent-dark);">Nhập từ điển từ PDF</h3>
+        <p style="font-size: 13px; color: var(--muted); margin-top: 0; margin-bottom: 12px; line-height: 1.4;">Tính năng này tự động đọc nội dung PDF. Mỗi dòng nên tuân theo định dạng <code>Từ vựng : Nghĩa</code> hoặc <code>Từ vựng - Nghĩa</code>.</p>
+        <input type="file" id="pdf-upload" accept="application/pdf" style="display: none;" onchange="handlePDFUpload(event)">
+        <button class="btn btn-ghost" style="margin-left: 0; padding: 8px 14px;" onclick="document.getElementById('pdf-upload').click()">📄 Chọn file PDF</button>
+        <div id="pdf-status" style="font-size: 13px; margin-top: 10px; font-weight: 500;"></div>
+      </div>
+
       <div class="vocab-form">
         <div>
           <label>Tiếng Anh</label>
@@ -756,6 +766,100 @@
     const div = document.createElement('div');
     div.innerText = str;
     return div.innerHTML;
+  }
+
+  // --- 7. ĐỌC TỪ VỰNG TỪ PDF ---
+  async function handlePDFUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const statusEl = document.getElementById('pdf-status');
+    statusEl.innerText = "Đang xử lý file PDF... Vui lòng đợi.";
+    statusEl.style.color = "var(--accent-dark)";
+
+    try {
+      if (typeof pdfjsLib === 'undefined') throw new Error("Thư viện PDF chưa tải xong.");
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+      const fileReader = new FileReader();
+      fileReader.onload = async function() {
+        const typedarray = new Uint8Array(this.result);
+        try {
+          const pdf = await pdfjsLib.getDocument(typedarray).promise;
+          let fullText = "";
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const textContent = await page.getTextContent();
+            let pageText = "";
+            let lastY = -1;
+            for (let item of textContent.items) {
+              if (lastY !== -1 && Math.abs(lastY - item.transform[5]) > 4) {
+                pageText += "\n";
+              }
+              pageText += item.str;
+              lastY = item.transform[5];
+            }
+            fullText += pageText + "\n";
+          }
+          const importedCount = parseAndImportText(fullText);
+          if (importedCount > 0) {
+            statusEl.innerText = `Đã thêm thành công ${importedCount} từ vựng!`;
+            statusEl.style.color = "var(--correct)";
+          } else {
+            statusEl.innerText = "Không tìm thấy từ vựng nào khớp định dạng (Từ - Nghĩa).";
+            statusEl.style.color = "var(--wrong)";
+          }
+        } catch (err) {
+          console.error(err);
+          statusEl.innerText = "Lỗi khi đọc nội dung PDF.";
+          statusEl.style.color = "var(--wrong)";
+        }
+      };
+      fileReader.readAsArrayBuffer(file);
+    } catch (err) {
+      statusEl.innerText = err.message;
+      statusEl.style.color = "var(--wrong)";
+    }
+    event.target.value = '';
+  }
+
+  function parseAndImportText(text) {
+    const lines = text.split('\n');
+    let count = 0;
+    
+    for (let line of lines) {
+      line = line.trim();
+      if (!line) continue;
+      
+      const delimiterMatch = line.match(/\s+([:\-–—=])\s+/);
+      if (delimiterMatch) {
+        const delimiterIndex = delimiterMatch.index;
+        let en = line.substring(0, delimiterIndex).trim();
+        let vi = line.substring(delimiterIndex + delimiterMatch[0].length).trim();
+        
+        let pho = '';
+        const phoMatch = en.match(/(.+?)\s*(\/.+\/|\[.+\])/);
+        if (phoMatch) {
+            en = phoMatch[1].trim();
+            pho = phoMatch[2].trim();
+        }
+
+        if (en && vi && en.length > 1 && en.length < 50) {
+          const exists = customVocab.some(w => w.en.toLowerCase() === en.toLowerCase());
+          if (!exists) {
+            customVocab.push({ id: Date.now() + count, en, vi, pho });
+            count++;
+          }
+        }
+      }
+    }
+    if (count > 0) {
+      saveCustom();
+      rebuildVocabList();
+      renderStats();
+      renderVocabList();
+    }
+    return count;
   }
 
   // Bàn phím: cách để lật thẻ khi ở chế độ Thẻ ghi nhớ
