@@ -1,63 +1,1648 @@
 [
-  { "id": 1, "en": "Make a lot of good friends", "pho": "/meɪk ə lɒt əv ɡʊd frendz/", "vi": "Kết giao được nhiều bạn tốt", "example": "Joining a sports club is a great way to make a lot of good friends.", "category": "Tuần 1" },
-  { "id": 2, "en": "Create good memories with people", "pho": "/kriˈeɪt ɡʊd ˈmeməriz wɪð ˈpiːpl/", "vi": "Tạo ra những kỷ niệm đẹp với mọi người", "example": "We always travel together to create good memories with people we love.", "category": "Tuần 1" },
-  { "id": 3, "en": "Expand social networking", "pho": "/ɪkˈspænd ˈsəʊʃl ˈnetwɜːkɪŋ/", "vi": "Mở rộng mối quan hệ xã hội", "example": "Attending industry events will help you expand social networking.", "category": "Tuần 1" },
-  { "id": 4, "en": "Improve communication skills", "pho": "/ɪmˈpruːv kəˌmjuːnɪˈkeɪʃn skɪlz/", "vi": "Nâng cao kỹ năng giao tiếp", "example": "Reading books and talking to strangers can help improve communication skills.", "category": "Tuần 1" },
-  { "id": 5, "en": "Stay connected with people / keep in touch with people", "pho": "/steɪ kəˈnektɪd wɪð ˈpiːpl / kiːp ɪn tʌtʃ wɪð ˈpiːpl/", "vi": "Giữ liên lạc với mọi người", "example": "Social media makes it easier to stay connected with people far away.", "category": "Tuần 1" },
-  { "id": 6, "en": "Boost friend bonding", "pho": "/buːst frend ˈbɒndɪŋ/", "vi": "Thắt chặt tình bạn", "example": "Playing team sports is a fun way to boost friend bonding.", "category": "Tuần 1" },
-  { "id": 7, "en": "Acquire knowledge naturally", "pho": "/əˈkwaɪər ˈnɒlɪdʒ ˈnætʃrəli/", "vi": "Tiếp thu kiến thức một cách tự nhiên", "example": "Watching documentaries helps children acquire knowledge naturally.", "category": "Tuần 1" },
-  { "id": 8, "en": "Foster my communication skills", "pho": "/ˈfɒstər maɪ kəˌmjuːnɪˈkeɪʃn skɪlz/", "vi": "Trau dồi kỹ năng giao tiếp của bản thân", "example": "Working in a diverse team will foster my communication skills.", "category": "Tuần 1" },
-  { "id": 9, "en": "Feel comfortable and relaxed / reduce stress and unwind", "pho": "/fiːl ˈkʌmftəbl ənd rɪˈlækst / rɪˈdjuːs stres ənd ˌʌnˈwaɪnd/", "vi": "Cảm thấy thoải mái, thư thái / giảm căng thẳng và xả stress", "example": "Listening to acoustic music makes me feel comfortable and relaxed.", "category": "Tuần 1" },
-  { "id": 10, "en": "Save time / save money / buy necessary things for myself", "pho": "/seɪv taɪm / seɪv ˈmʌni / baɪ ˈnesəsəri θɪŋz fər maɪˈself/", "vi": "Tiết kiệm thời gian / tiết kiệm tiền bạc / mua sắm thứ cần thiết cho bản thân", "example": "Cooking at home helps me save money and buy necessary things for myself.", "category": "Tuần 1" },
-  { "id": 11, "en": "Meet new people and new friends", "pho": "/miːt njuː ˈpiːpl ənd njuː frendz/", "vi": "Gặp gỡ và kết giao với những người bạn mới", "example": "Volunteering gives you a chance to meet new people and new friends.", "category": "Tuần 1" },
-  { "id": 12, "en": "Become more confident and socialized", "pho": "/bɪˈkʌm mɔː ˈkɒnfɪdənt ənd ˈsəʊʃəlaɪzd/", "vi": "Trở nên tự tin và hòa đồng hơn", "example": "Public speaking classes help students become more confident and socialized.", "category": "Tuần 1" },
-  { "id": 13, "en": "Hear and learn from their experience and real-life stories", "pho": "/hɪər ənd lɜːn frəm ðeər ɪkˈspɪəriəns ənd rɪəl-laɪf ˈstɔːriz/", "vi": "Lắng nghe và học hỏi từ kinh nghiệm và câu chuyện thực tế của họ", "example": "I love talking to elders to hear and learn from their experience and real-life stories.", "category": "Tuần 1" },
-  { "id": 14, "en": "Become a better version of myself", "pho": "/bɪˈkʌm ə ˈbetə ˈvɜːʃn əv maɪˈself/", "vi": "Trở thành phiên bản hoàn thiện hơn của chính mình", "example": "Exercising and reading daily help me become a better version of myself.", "category": "Tuần 1" },
-  { "id": 15, "en": "Make our daily lives much less laborious and more colorful", "pho": "/meɪk ˈaʊə ˈdeɪli laɪvz mʌtʃ les ləˈbɔːriəs ənd mɔː ˈkʌləfl/", "vi": "Giúp cuộc sống thường ngày bớt vất vả và trở nên thú vị hơn", "example": "Smart technologies make our daily lives much less laborious and more colorful.", "category": "Tuần 1" },
-  { "id": 16, "en": "Expand my horizons", "pho": "/ɪkˈspænd maɪ həˈraɪznz/", "vi": "Mở rộng vốn hiểu biết", "example": "Traveling abroad to experience new cultures is the best way to expand my horizons.", "category": "Tuần 1" },
-  { "id": 17, "en": "Develop my creative skills / develop my creativity", "pho": "/dɪˈveləp maɪ kriˈeɪtɪv skɪlz / dɪˈveləp maɪ ˌkriːeɪˈtɪvəti/", "vi": "Phát triển kỹ năng sáng tạo / khơi dậy sức sáng tạo của bản thân", "example": "Painting and drawing can effectively develop my creative skills.", "category": "Tuần 1" },
-  { "id": 18, "en": "Unwind or reduce stress after an industrious day", "pho": "/ˌʌnˈwaɪnd ɔː rɪˈdjuːs stres ˈɑːftər ən ɪnˈdʌstriəs deɪ/", "vi": "Thư giãn và xả stress sau một ngày làm việc vất vả", "example": "A hot cup of tea helps me unwind or reduce stress after an industrious day.", "category": "Tuần 1" },
-  { "id": 19, "en": "Be environmentally friendly", "pho": "/bi ɪnˌvaɪrənˈmentəli ˈfrendli/", "vi": "Thân thiện với môi trường", "example": "Using reusable bags instead of plastic ones is a way to be environmentally friendly.", "category": "Tuần 1" },
-  { "id": 20, "en": "Help entertain myself", "pho": "/help ˌentəˈteɪn maɪˈself/", "vi": "Giúp bản thân giải trí", "example": "Watching comedies can greatly help entertain myself on the weekends.", "category": "Tuần 1" },
-  { "id": 21, "en": "Improve/boost/enhance my knowledge and understanding", "pho": "/ɪmˈpruːv / buːst / ɪnˈhɑːns maɪ ˈnɒlɪdʒ ənd ˌʌndəˈstændɪŋ/", "vi": "Trau dồi và nâng cao kiến thức cùng sự hiểu biết", "example": "Reading daily news will enhance my knowledge and understanding of the world.", "category": "Tuần 1" },
-  { "id": 22, "en": "Provoke positive energy", "pho": "/prəˈvəʊk ˈpɒzətɪv ˈenədʒi/", "vi": "Khơi dậy năng lượng tích cực", "example": "Exercising every morning can provoke positive energy for the whole day.", "category": "Tuần 1" },
-  { "id": 23, "en": "Experience new cultures and traditions", "pho": "/ɪkˈspɪəriəns njuː ˈkʌltʃəz ənd trəˈdɪʃnz/", "vi": "Trải nghiệm những nền văn hóa và truyền thống mới", "example": "I want to study abroad to experience new cultures and traditions.", "category": "Tuần 1" },
-  { "id": 24, "en": "Improve physical and mental health", "pho": "/ɪmˈpruːv ˈfɪzɪkl ənd ˈmentl helθ/", "vi": "Cải thiện sức khỏe thể chất và tinh thần", "example": "Yoga is known to significantly improve physical and mental health.", "category": "Tuần 1" },
-  { "id": 25, "en": "Face health problems", "pho": "/feɪs helθ ˈprɒbləmz/", "vi": "Đối mặt với các vấn đề sức khỏe", "example": "Without a balanced diet, you might face health problems in the future.", "category": "Tuần 1" },
-  { "id": 26, "en": "Maintain a healthy lifestyle", "pho": "/meɪnˈteɪn ə ˈhelθi ˈlaɪfstaɪl/", "vi": "Duy trì lối sống lành mạnh", "example": "It is important to maintain a healthy lifestyle by eating well and working out.", "category": "Tuần 1" },
-  { "id": 27, "en": "Stay in shape", "pho": "/steɪ ɪn ʃeɪp/", "vi": "Giữ gìn vóc dáng", "example": "He goes to the gym regularly to stay in shape.", "category": "Tuần 1" },
-  { "id": 28, "en": "Keep me in good mood", "pho": "/kiːp mi ɪn ɡʊd muːd/", "vi": "Giữ cho tâm trạng luôn vui vẻ", "example": "Listening to upbeat music can keep me in good mood.", "category": "Tuần 1" },
-  { "id": 29, "en": "Boost my mood", "pho": "/buːst maɪ muːd/", "vi": "Làm tôi vui lên / Cải thiện tâm trạng", "example": "A delicious cup of coffee in the morning can easily boost my mood.", "category": "Tuần 1" },
-  { "id": 30, "en": "Improve the quality of my life", "pho": "/ɪmˈpruːv ðə ˈkwɒləti əv maɪ laɪf/", "vi": "Cải thiện chất lượng cuộc sống", "example": "Getting enough sleep every night will improve the quality of my life.", "category": "Tuần 1" },
-  { "id": 31, "en": "Enhance my daily life", "pho": "/ɪnˈhɑːns maɪ ˈdeɪli laɪf/", "vi": "Nâng cao chất lượng cuộc sống thường ngày", "example": "Smart home devices greatly enhance my daily life.", "category": "Tuần 1" },
-  { "id": 32, "en": "Make an effort to", "pho": "/meɪk ən ˈefət tu/", "vi": "Nỗ lực làm gì đó", "example": "You should make an effort to learn a new language this year.", "category": "Tuần 1" },
-  { "id": 33, "en": "Play an important role", "pho": "/pleɪ ən ɪmˈpɔːtnt rəʊl/", "vi": "Đóng vai trò quan trọng", "example": "Education plays an important role in personal development.", "category": "Tuần 1" },
-  { "id": 34, "en": "A source of entertainment", "pho": "/ə sɔːs əv ˌentəˈteɪnmənt/", "vi": "Một nguồn giải trí", "example": "Television is a common source of entertainment for many families.", "category": "Tuần 1" },
-  { "id": 35, "en": "A means of relaxation", "pho": "/ə miːnz əv ˌriːlækˈseɪʃn/", "vi": "Một phương thức thư giãn", "example": "Gardening is a great means of relaxation after a busy day.", "category": "Tuần 1" },
-  { "id": 36, "en": "Create lasting memories", "pho": "/kriˈeɪt ˈlɑːstɪŋ ˈmeməriz/", "vi": "Tạo nên những kỷ niệm khó quên", "example": "Family vacations are the best way to create lasting memories.", "category": "Tuần 1" },
-  { "id": 37, "en": "Learn about different cultures", "pho": "/lɜːn əˈbaʊt ˈdɪfrənt ˈkʌltʃəz/", "vi": "Tìm hiểu về các nền văn hoá khác nhau", "example": "I enjoy reading books to learn about different cultures around the world.", "category": "Tuần 1" },
-  { "id": 38, "en": "Discover new perspectives", "pho": "/dɪsˈkʌvə njuː pəˈspektɪvz/", "vi": "Khám phá những góc nhìn mới", "example": "Talking to people from other countries helps you discover new perspectives.", "category": "Tuần 1" },
-  { "id": 39, "en": "Stay connected with others", "pho": "/steɪ kəˈnektɪd wɪð ˈʌðəz/", "vi": "Duy trì liên lạc với người khác", "example": "Using smartphones makes it easier to stay connected with others.", "category": "Tuần 1" },
-  { "id": 40, "en": "Access information", "pho": "/ˈækses ˌɪnfəˈmeɪʃn/", "vi": "Tiếp cận thông tin", "example": "The internet allows us to access information quickly and easily.", "category": "Tuần 1" },
-  { "id": 41, "en": "Manage my life better", "pho": "/ˈmænɪdʒ maɪ laɪf ˈbetə/", "vi": "Quản lý cuộc sống của mình tốt hơn", "example": "Using a daily planner helps me manage my life better.", "category": "Tuần 1" },
-  { "id": 42, "en": "Make it a priority for me", "pho": "/meɪk ɪt ə praɪˈɒrəti fə mi/", "vi": "Coi đó là ưu tiên hàng đầu của tôi", "example": "I will make it a priority for me to exercise daily from now on.", "category": "Tuần 1" },
-  { "id": 43, "en": "A part of my routine", "pho": "/ə pɑːt əv maɪ ruːˈtiːn/", "vi": "Một phần trong thói quen sinh hoạt hàng ngày", "example": "Reading 20 pages before bed has become a part of my routine.", "category": "Tuần 1" },
-  { "id": 44, "en": "Keep updated with", "pho": "/kiːp ʌpˈdeɪtɪd wɪð/", "vi": "Cập nhật liên tục về (vấn đề gì đó)", "example": "I read the newspaper every morning to keep updated with current events.", "category": "Tuần 1" },
-  { "id": 45, "en": "Buy necessities", "pho": "/baɪ nəˈsesətiz/", "vi": "Mua sắm các nhu yếu phẩm", "example": "We went to the supermarket to buy necessities for the week.", "category": "Tuần 1" },
-  { "id": 46, "en": "Spend much time on sth", "pho": "/spend mʌtʃ taɪm ɒn ˈsʌmθɪŋ/", "vi": "Dành nhiều thời gian cho việc gì đó", "example": "Try not to spend much time on scrolling through social media.", "category": "Tuần 1" },
-  { "id": 47, "en": "Meet the deadlines", "pho": "/miːt ðə ˈdedlaɪnz/", "vi": "Kịp tiến độ / Hoàn thành đúng thời hạn", "example": "Working overtime helped the team meet the deadlines for the project.", "category": "Tuần 1" },
-  { "id": 48, "en": "Reduce pollution", "pho": "/rɪˈdjuːs pəˈluːʃn/", "vi": "Giảm thiểu ô nhiễm", "example": "Using public transport instead of personal cars can significantly reduce pollution.", "category": "Tuần 1" },
-  { "id": 49, "en": "Decrease traffic congestion", "pho": "/dɪˈkriːs ˈtræfɪk kənˈdʒestʃən/", "vi": "Giảm tình trạng ùn tắc giao thông", "example": "Building new overpasses will help decrease traffic congestion in the city.", "category": "Tuần 1" },
-  { "id": 50, "en": "Costs an arm and a leg", "pho": "/kɒsts ən ɑːm ənd ə leɡ/", "vi": "Đắt cắt cổ / Đắt đỏ vô cùng", "example": "Buying a new apartment in the center of the city costs an arm and a leg.", "category": "Tuần 1" },
-  { "id": 51, "en": "I'm hopeless / terrible at sth", "pho": "/aɪm ˈhəʊpləs / ˈterəbl ət ˈsʌmθɪŋ/", "vi": "Tôi cực kỳ yếu kém / rất dở ở mảng nào đó", "example": "I'm hopeless at playing the piano.", "category": "Tuần 1" },
-  { "id": 52, "en": "I strongly disagree with", "pho": "/aɪ ˈstrɒŋli ˌdɪsəˈɡriː wɪð/", "vi": "Tôi hoàn toàn không đồng ý với", "example": "I strongly disagree with your opinion on the matter.", "category": "Tuần 1" },
-  { "id": 53, "en": "I find it difficult to do sth", "pho": "/aɪ faɪnd ɪt ˈdɪfɪkəlt tə duː ˈsʌmθɪŋ/", "vi": "Tôi thấy thật khó để làm việc gì đó", "example": "I find it difficult to understand complex mathematical problems.", "category": "Tuần 1" },
-  { "id": 54, "en": "Be in a bad mood", "pho": "/bi ɪn ə bæd muːd/", "vi": "Đang có tâm trạng không tốt / Đang bực bội", "example": "He seems to be in a bad mood today; maybe something happened at work.", "category": "Tuần 1" },
-  { "id": 55, "en": "Do harm to sth", "pho": "/duː hɑːm tə ˈsʌmθɪŋ/", "vi": "Gây hại cho điều gì đó", "example": "Smoking can do harm to your lungs and overall respiratory system.", "category": "Tuần 1" },
-  { "id": 56, "en": "Feel guilty about", "pho": "/fiːl ˈɡɪlti əˈbaʊt/", "vi": "Cảm thấy có lỗi / áy náy về", "example": "She feels guilty about forgetting her friend's birthday.", "category": "Tuần 1" },
-  { "id": 57, "en": "Primarily cause health problems, such as obesity, diabetes, and heart disease.", "pho": "/praɪˈmerəli kɔːz helθ ˈprɒbləmz, sʌtʃ əz əʊˈbiːsəti, ˌdaɪəˈbiːtiːz, ənd hɑːt dɪˈziːz/", "vi": "Chủ yếu gây ra các vấn đề sức khỏe như béo phì, tiểu đường và bệnh tim.", "example": "Consuming excessive sugar can primarily cause health problems, such as obesity, diabetes, and heart disease.", "category": "Tuần 1" },
-  { "id": 58, "en": "Negatively affect / impact / influence sth (people's lives)", "pho": "/ˈneɡətɪvli əˈfekt / ˈɪmpækt / ˈɪnfluəns ˈsʌmθɪŋ/", "vi": "Tác động tiêu cực đến (cuộc sống của con người)", "example": "Excessive use of electronic devices can negatively affect people's sleep patterns.", "category": "Tuần 1" },
-  { "id": 59, "en": "Significantly influence / affect / impact people's physical and mental health", "pho": "/sɪɡˈnɪfɪkəntli ˈɪnfluəns / əˈfekt / ˈɪmpækt ˈpiːplz ˈfɪzɪkl ənd ˈmentl helθ/", "vi": "Ảnh hưởng nghiêm trọng đến sức khỏe thể chất và tinh thần của con người", "example": "Stress and anxiety can significantly influence people's physical and mental health.", "category": "Tuần 1" },
-  { "id": 60, "en": "Lead to a lack of sth", "pho": "/liːd tu ə læk əv ˈsʌmθɪŋ/", "vi": "Dẫn đến tình trạng thiếu hụt điều gì đó", "example": "Lack of exercise can lead to a lack of physical fitness and overall well-being.", "category": "Tuần 1" },
-  { "id": 61, "en": "Waste time and money", "pho": "/weɪst taɪm ənd ˈmʌni/", "vi": "Lãng phí thời gian và tiền bạc", "example": "Don't waste your time on activities that don't contribute to your goals.", "category": "Tuần 1" }
+  {
+    "id": 1,
+    "en": "Make a lot of good friends",
+    "pho": "/meɪk ə lɒt əv ɡʊd frendz/",
+    "vi": "Kết giao được nhiều bạn tốt",
+    "example": "Joining a sports club is a great way to make a lot of good friends.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Make",
+        "vi": "tạo ra"
+      },
+      {
+        "word": "a",
+        "vi": "một"
+      },
+      {
+        "word": "lot",
+        "vi": "nhiều"
+      },
+      {
+        "word": "of",
+        "vi": "của"
+      },
+      {
+        "word": "good",
+        "vi": "tốt"
+      },
+      {
+        "word": "friends",
+        "vi": "bạn bè"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "en": "Create good memories with people",
+    "pho": "/kriˈeɪt ɡʊd ˈmeməriz wɪð ˈpiːpl/",
+    "vi": "Tạo ra những kỷ niệm đẹp với mọi người",
+    "example": "We always travel together to create good memories with people we love.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Create",
+        "vi": "tạo ra"
+      },
+      {
+        "word": "good",
+        "vi": "tốt"
+      },
+      {
+        "word": "memories",
+        "vi": "kỷ niệm"
+      },
+      {
+        "word": "with",
+        "vi": "với"
+      },
+      {
+        "word": "people",
+        "vi": "mọi người"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "en": "Expand social networking",
+    "pho": "/ɪkˈspænd ˈsəʊʃl ˈnetwɜːkɪŋ/",
+    "vi": "Mở rộng mối quan hệ xã hội",
+    "example": "Attending industry events will help you expand social networking.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Expand",
+        "vi": "mở rộng"
+      },
+      {
+        "word": "social",
+        "vi": "xã hội"
+      },
+      {
+        "word": "networking",
+        "vi": "mạng lưới"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "en": "Improve communication skills",
+    "pho": "/ɪmˈpruːv kəˌmjuːnɪˈkeɪʃn skɪlz/",
+    "vi": "Nâng cao kỹ năng giao tiếp",
+    "example": "Reading books and talking to strangers can help improve communication skills.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Improve",
+        "vi": "cải thiện"
+      },
+      {
+        "word": "communication",
+        "vi": "sự giao tiếp"
+      },
+      {
+        "word": "skills",
+        "vi": "kỹ năng"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "en": "Stay connected with people / keep in touch with people",
+    "pho": "/steɪ kəˈnektɪd wɪð ˈpiːpl / kiːp ɪn tʌtʃ wɪð ˈpiːpl/",
+    "vi": "Giữ liên lạc với mọi người",
+    "example": "Social media makes it easier to stay connected with people far away.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Stay",
+        "vi": "giữ (trạng thái)"
+      },
+      {
+        "word": "connected",
+        "vi": "kết nối"
+      },
+      {
+        "word": "with",
+        "vi": "với"
+      },
+      {
+        "word": "people",
+        "vi": "mọi người"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "en": "Boost friend bonding",
+    "pho": "/buːst frend ˈbɒndɪŋ/",
+    "vi": "Thắt chặt tình bạn",
+    "example": "Playing team sports is a fun way to boost friend bonding.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Boost",
+        "vi": "thúc đẩy"
+      },
+      {
+        "word": "friend",
+        "vi": "người bạn"
+      },
+      {
+        "word": "bonding",
+        "vi": "sự gắn kết"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "en": "Acquire knowledge naturally",
+    "pho": "/əˈkwaɪər ˈnɒlɪdʒ ˈnætʃrəli/",
+    "vi": "Tiếp thu kiến thức một cách tự nhiên",
+    "example": "Watching documentaries helps children acquire knowledge naturally.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Acquire",
+        "vi": "tiếp thu"
+      },
+      {
+        "word": "knowledge",
+        "vi": "kiến thức"
+      },
+      {
+        "word": "naturally",
+        "vi": "tự nhiên"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "en": "Foster my communication skills",
+    "pho": "/ˈfɒstər maɪ kəˌmjuːnɪˈkeɪʃn skɪlz/",
+    "vi": "Trau dồi kỹ năng giao tiếp của bản thân",
+    "example": "Working in a diverse team will foster my communication skills.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Foster",
+        "vi": "trau dồi"
+      },
+      {
+        "word": "my",
+        "vi": "của tôi"
+      },
+      {
+        "word": "communication",
+        "vi": "sự giao tiếp"
+      },
+      {
+        "word": "skills",
+        "vi": "kỹ năng"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "en": "Feel comfortable and relaxed / reduce stress and unwind",
+    "pho": "/fiːl ˈkʌmftəbl ənd rɪˈlækst / rɪˈdjuːs stres ənd ˌʌnˈwaɪnd/",
+    "vi": "Cảm thấy thoải mái, thư thái / giảm căng thẳng và xả stress",
+    "example": "Listening to acoustic music makes me feel comfortable and relaxed.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Feel",
+        "vi": "cảm thấy"
+      },
+      {
+        "word": "comfortable",
+        "vi": "thoải mái"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "relaxed",
+        "vi": "thư giãn"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "en": "Save time / save money / buy necessary things for myself",
+    "pho": "/seɪv taɪm / seɪv ˈmʌni / baɪ ˈnesəsəri θɪŋz fər maɪˈself/",
+    "vi": "Tiết kiệm thời gian / tiết kiệm tiền bạc / mua sắm thứ cần thiết cho bản thân",
+    "example": "Cooking at home helps me save money and buy necessary things for myself.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Save",
+        "vi": "tiết kiệm"
+      },
+      {
+        "word": "time",
+        "vi": "thời gian"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "en": "Meet new people and new friends",
+    "pho": "/miːt njuː ˈpiːpl ənd njuː frendz/",
+    "vi": "Gặp gỡ và kết giao với những người bạn mới",
+    "example": "Volunteering gives you a chance to meet new people and new friends.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Meet",
+        "vi": "gặp gỡ"
+      },
+      {
+        "word": "new",
+        "vi": "mới"
+      },
+      {
+        "word": "people",
+        "vi": "mọi người"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "new",
+        "vi": "mới"
+      },
+      {
+        "word": "friends",
+        "vi": "bạn bè"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "en": "Become more confident and socialized",
+    "pho": "/bɪˈkʌm mɔː ˈkɒnfɪdənt ənd ˈsəʊʃəlaɪzd/",
+    "vi": "Trở nên tự tin và hòa đồng hơn",
+    "example": "Public speaking classes help students become more confident and socialized.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Become",
+        "vi": "trở thành"
+      },
+      {
+        "word": "more",
+        "vi": "nhiều hơn"
+      },
+      {
+        "word": "confident",
+        "vi": "tự tin"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "socialized",
+        "vi": "hòa đồng"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "en": "Hear and learn from their experience and real-life stories",
+    "pho": "/hɪər ənd lɜːn frəm ðeər ɪkˈspɪəriəns ənd rɪəl-laɪf ˈstɔːriz/",
+    "vi": "Lắng nghe và học hỏi từ kinh nghiệm và câu chuyện thực tế của họ",
+    "example": "I love talking to elders to hear and learn from their experience and real-life stories.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Hear",
+        "vi": "nghe"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "learn",
+        "vi": "học"
+      },
+      {
+        "word": "from",
+        "vi": "từ"
+      },
+      {
+        "word": "their",
+        "vi": "của họ"
+      },
+      {
+        "word": "experience",
+        "vi": "trải nghiệm"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "real",
+        "vi": "thực tế"
+      },
+      {
+        "word": "life",
+        "vi": "cuộc sống"
+      },
+      {
+        "word": "stories",
+        "vi": "câu chuyện"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "en": "Become a better version of myself",
+    "pho": "/bɪˈkʌm ə ˈbetə ˈvɜːʃn əv maɪˈself/",
+    "vi": "Trở thành phiên bản hoàn thiện hơn của chính mình",
+    "example": "Exercising and reading daily help me become a better version of myself.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Become",
+        "vi": "trở thành"
+      },
+      {
+        "word": "a",
+        "vi": "một"
+      },
+      {
+        "word": "better",
+        "vi": "tốt hơn"
+      },
+      {
+        "word": "version",
+        "vi": "phiên bản"
+      },
+      {
+        "word": "of",
+        "vi": "của"
+      },
+      {
+        "word": "myself",
+        "vi": "bản thân tôi"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "en": "Make our daily lives much less laborious and more colorful",
+    "pho": "/meɪk ˈaʊə ˈdeɪli laɪvz mʌtʃ les ləˈbɔːriəs ənd mɔː ˈkʌləfl/",
+    "vi": "Giúp cuộc sống thường ngày bớt vất vả và trở nên thú vị hơn",
+    "example": "Smart technologies make our daily lives much less laborious and more colorful.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Make",
+        "vi": "tạo ra"
+      },
+      {
+        "word": "our",
+        "vi": "của chúng ta"
+      },
+      {
+        "word": "daily",
+        "vi": "hằng ngày"
+      },
+      {
+        "word": "lives",
+        "vi": "cuộc sống"
+      },
+      {
+        "word": "much",
+        "vi": "nhiều"
+      },
+      {
+        "word": "less",
+        "vi": "ít hơn"
+      },
+      {
+        "word": "laborious",
+        "vi": "vất vả"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "more",
+        "vi": "nhiều hơn"
+      },
+      {
+        "word": "colorful",
+        "vi": "nhiều màu sắc"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "en": "Expand my horizons",
+    "pho": "/ɪkˈspænd maɪ həˈraɪznz/",
+    "vi": "Mở rộng vốn hiểu biết",
+    "example": "Traveling abroad to experience new cultures is the best way to expand my horizons.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Expand",
+        "vi": "mở rộng"
+      },
+      {
+        "word": "my",
+        "vi": "của tôi"
+      },
+      {
+        "word": "horizons",
+        "vi": "tầm nhìn"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "en": "Develop my creative skills / develop my creativity",
+    "pho": "/dɪˈveləp maɪ kriˈeɪtɪv skɪlz / dɪˈveləp maɪ ˌkriːeɪˈtɪvəti/",
+    "vi": "Phát triển kỹ năng sáng tạo / khơi dậy sức sáng tạo của bản thân",
+    "example": "Painting and drawing can effectively develop my creative skills.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Develop",
+        "vi": "phát triển"
+      },
+      {
+        "word": "my",
+        "vi": "của tôi"
+      },
+      {
+        "word": "creative",
+        "vi": "sáng tạo"
+      },
+      {
+        "word": "skills",
+        "vi": "kỹ năng"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "en": "Unwind or reduce stress after an industrious day",
+    "pho": "/ˌʌnˈwaɪnd ɔː rɪˈdjuːs stres ˈɑːftər ən ɪnˈdʌstriəs deɪ/",
+    "vi": "Thư giãn và xả stress sau một ngày làm việc vất vả",
+    "example": "A hot cup of tea helps me unwind or reduce stress after an industrious day.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Unwind",
+        "vi": "thư giãn"
+      },
+      {
+        "word": "or",
+        "vi": "hoặc"
+      },
+      {
+        "word": "reduce",
+        "vi": "giảm thiểu"
+      },
+      {
+        "word": "stress",
+        "vi": "căng thẳng"
+      },
+      {
+        "word": "after",
+        "vi": "sau khi"
+      },
+      {
+        "word": "an",
+        "vi": "một"
+      },
+      {
+        "word": "industrious",
+        "vi": "chăm chỉ"
+      },
+      {
+        "word": "day",
+        "vi": "ngày"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "en": "Be environmentally friendly",
+    "pho": "/bi ɪnˌvaɪrənˈmentəli ˈfrendli/",
+    "vi": "Thân thiện với môi trường",
+    "example": "Using reusable bags instead of plastic ones is a way to be environmentally friendly.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Be",
+        "vi": "là"
+      },
+      {
+        "word": "environmentally",
+        "vi": "về môi trường"
+      },
+      {
+        "word": "friendly",
+        "vi": "thân thiện"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "en": "Help entertain myself",
+    "pho": "/help ˌentəˈteɪn maɪˈself/",
+    "vi": "Giúp bản thân giải trí",
+    "example": "Watching comedies can greatly help entertain myself on the weekends.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Help",
+        "vi": "giúp đỡ"
+      },
+      {
+        "word": "entertain",
+        "vi": "giải trí"
+      },
+      {
+        "word": "myself",
+        "vi": "bản thân tôi"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "en": "Improve/boost/enhance my knowledge and understanding",
+    "pho": "/ɪmˈpruːv / buːst / ɪnˈhɑːns maɪ ˈnɒlɪdʒ ənd ˌʌndəˈstændɪŋ/",
+    "vi": "Trau dồi và nâng cao kiến thức cùng sự hiểu biết",
+    "example": "Reading daily news will enhance my knowledge and understanding of the world.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Improve",
+        "vi": "cải thiện"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "en": "Provoke positive energy",
+    "pho": "/prəˈvəʊk ˈpɒzətɪv ˈenədʒi/",
+    "vi": "Khơi dậy năng lượng tích cực",
+    "example": "Exercising every morning can provoke positive energy for the whole day.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Provoke",
+        "vi": "kích thích"
+      },
+      {
+        "word": "positive",
+        "vi": "tích cực"
+      },
+      {
+        "word": "energy",
+        "vi": "năng lượng"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "en": "Experience new cultures and traditions",
+    "pho": "/ɪkˈspɪəriəns njuː ˈkʌltʃəz ənd trəˈdɪʃnz/",
+    "vi": "Trải nghiệm những nền văn hóa và truyền thống mới",
+    "example": "I want to study abroad to experience new cultures and traditions.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Experience",
+        "vi": "trải nghiệm"
+      },
+      {
+        "word": "new",
+        "vi": "mới"
+      },
+      {
+        "word": "cultures",
+        "vi": "văn hóa"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "traditions",
+        "vi": "truyền thống"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "en": "Improve physical and mental health",
+    "pho": "/ɪmˈpruːv ˈfɪzɪkl ənd ˈmentl helθ/",
+    "vi": "Cải thiện sức khỏe thể chất và tinh thần",
+    "example": "Yoga is known to significantly improve physical and mental health.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Improve",
+        "vi": "cải thiện"
+      },
+      {
+        "word": "physical",
+        "vi": "thể chất"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "mental",
+        "vi": "tinh thần"
+      },
+      {
+        "word": "health",
+        "vi": "sức khỏe"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "en": "Face health problems",
+    "pho": "/feɪs helθ ˈprɒbləmz/",
+    "vi": "Đối mặt với các vấn đề sức khỏe",
+    "example": "Without a balanced diet, you might face health problems in the future.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Face",
+        "vi": "đối mặt"
+      },
+      {
+        "word": "health",
+        "vi": "sức khỏe"
+      },
+      {
+        "word": "problems",
+        "vi": "vấn đề"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "en": "Maintain a healthy lifestyle",
+    "pho": "/meɪnˈteɪn ə ˈhelθi ˈlaɪfstaɪl/",
+    "vi": "Duy trì lối sống lành mạnh",
+    "example": "It is important to maintain a healthy lifestyle by eating well and working out.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Maintain",
+        "vi": "duy trì"
+      },
+      {
+        "word": "a",
+        "vi": "một"
+      },
+      {
+        "word": "healthy",
+        "vi": "lành mạnh"
+      },
+      {
+        "word": "lifestyle",
+        "vi": "lối sống"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "en": "Stay in shape",
+    "pho": "/steɪ ɪn ʃeɪp/",
+    "vi": "Giữ gìn vóc dáng",
+    "example": "He goes to the gym regularly to stay in shape.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Stay",
+        "vi": "giữ (trạng thái)"
+      },
+      {
+        "word": "in",
+        "vi": "trong"
+      },
+      {
+        "word": "shape",
+        "vi": "vóc dáng"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "en": "Keep me in good mood",
+    "pho": "/kiːp mi ɪn ɡʊd muːd/",
+    "vi": "Giữ cho tâm trạng luôn vui vẻ",
+    "example": "Listening to upbeat music can keep me in good mood.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Keep",
+        "vi": "giữ"
+      },
+      {
+        "word": "me",
+        "vi": "tôi"
+      },
+      {
+        "word": "in",
+        "vi": "trong"
+      },
+      {
+        "word": "good",
+        "vi": "tốt"
+      },
+      {
+        "word": "mood",
+        "vi": "tâm trạng"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "en": "Boost my mood",
+    "pho": "/buːst maɪ muːd/",
+    "vi": "Làm tôi vui lên / Cải thiện tâm trạng",
+    "example": "A delicious cup of coffee in the morning can easily boost my mood.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Boost",
+        "vi": "thúc đẩy"
+      },
+      {
+        "word": "my",
+        "vi": "của tôi"
+      },
+      {
+        "word": "mood",
+        "vi": "tâm trạng"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "en": "Improve the quality of my life",
+    "pho": "/ɪmˈpruːv ðə ˈkwɒləti əv maɪ laɪf/",
+    "vi": "Cải thiện chất lượng cuộc sống",
+    "example": "Getting enough sleep every night will improve the quality of my life.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Improve",
+        "vi": "cải thiện"
+      },
+      {
+        "word": "the",
+        "vi": "cái (mạo từ)"
+      },
+      {
+        "word": "quality",
+        "vi": "chất lượng"
+      },
+      {
+        "word": "of",
+        "vi": "của"
+      },
+      {
+        "word": "my",
+        "vi": "của tôi"
+      },
+      {
+        "word": "life",
+        "vi": "cuộc sống"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "en": "Enhance my daily life",
+    "pho": "/ɪnˈhɑːns maɪ ˈdeɪli laɪf/",
+    "vi": "Nâng cao chất lượng cuộc sống thường ngày",
+    "example": "Smart home devices greatly enhance my daily life.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Enhance",
+        "vi": "nâng cao"
+      },
+      {
+        "word": "my",
+        "vi": "của tôi"
+      },
+      {
+        "word": "daily",
+        "vi": "hằng ngày"
+      },
+      {
+        "word": "life",
+        "vi": "cuộc sống"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "en": "Make an effort to",
+    "pho": "/meɪk ən ˈefət tu/",
+    "vi": "Nỗ lực làm gì đó",
+    "example": "You should make an effort to learn a new language this year.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Make",
+        "vi": "tạo ra"
+      },
+      {
+        "word": "an",
+        "vi": "một"
+      },
+      {
+        "word": "effort",
+        "vi": "nỗ lực"
+      },
+      {
+        "word": "to",
+        "vi": "để"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "en": "Play an important role",
+    "pho": "/pleɪ ən ɪmˈpɔːtnt rəʊl/",
+    "vi": "Đóng vai trò quan trọng",
+    "example": "Education plays an important role in personal development.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Play",
+        "vi": "đóng (vai trò)"
+      },
+      {
+        "word": "an",
+        "vi": "một"
+      },
+      {
+        "word": "important",
+        "vi": "quan trọng"
+      },
+      {
+        "word": "role",
+        "vi": "vai trò"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "en": "A source of entertainment",
+    "pho": "/ə sɔːs əv ˌentəˈteɪnmənt/",
+    "vi": "Một nguồn giải trí",
+    "example": "Television is a common source of entertainment for many families.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "A",
+        "vi": "một"
+      },
+      {
+        "word": "source",
+        "vi": "nguồn"
+      },
+      {
+        "word": "of",
+        "vi": "của"
+      },
+      {
+        "word": "entertainment",
+        "vi": "sự giải trí"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "en": "A means of relaxation",
+    "pho": "/ə miːnz əv ˌriːlækˈseɪʃn/",
+    "vi": "Một phương thức thư giãn",
+    "example": "Gardening is a great means of relaxation after a busy day.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "A",
+        "vi": "một"
+      },
+      {
+        "word": "means",
+        "vi": "phương tiện"
+      },
+      {
+        "word": "of",
+        "vi": "của"
+      },
+      {
+        "word": "relaxation",
+        "vi": "sự thư giãn"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "en": "Create lasting memories",
+    "pho": "/kriˈeɪt ˈlɑːstɪŋ ˈmeməriz/",
+    "vi": "Tạo nên những kỷ niệm khó quên",
+    "example": "Family vacations are the best way to create lasting memories.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Create",
+        "vi": "tạo ra"
+      },
+      {
+        "word": "lasting",
+        "vi": "lâu dài"
+      },
+      {
+        "word": "memories",
+        "vi": "kỷ niệm"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "en": "Learn about different cultures",
+    "pho": "/lɜːn əˈbaʊt ˈdɪfrənt ˈkʌltʃəz/",
+    "vi": "Tìm hiểu về các nền văn hoá khác nhau",
+    "example": "I enjoy reading books to learn about different cultures around the world.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Learn",
+        "vi": "học"
+      },
+      {
+        "word": "about",
+        "vi": "về"
+      },
+      {
+        "word": "different",
+        "vi": "khác nhau"
+      },
+      {
+        "word": "cultures",
+        "vi": "văn hóa"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "en": "Discover new perspectives",
+    "pho": "/dɪsˈkʌvə njuː pəˈspektɪvz/",
+    "vi": "Khám phá những góc nhìn mới",
+    "example": "Talking to people from other countries helps you discover new perspectives.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Discover",
+        "vi": "khám phá"
+      },
+      {
+        "word": "new",
+        "vi": "mới"
+      },
+      {
+        "word": "perspectives",
+        "vi": "góc nhìn"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "en": "Stay connected with others",
+    "pho": "/steɪ kəˈnektɪd wɪð ˈʌðəz/",
+    "vi": "Duy trì liên lạc với người khác",
+    "example": "Using smartphones makes it easier to stay connected with others.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Stay",
+        "vi": "giữ (trạng thái)"
+      },
+      {
+        "word": "connected",
+        "vi": "kết nối"
+      },
+      {
+        "word": "with",
+        "vi": "với"
+      },
+      {
+        "word": "others",
+        "vi": "người khác"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "en": "Access information",
+    "pho": "/ˈækses ˌɪnfəˈmeɪʃn/",
+    "vi": "Tiếp cận thông tin",
+    "example": "The internet allows us to access information quickly and easily.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Access",
+        "vi": "tiếp cận"
+      },
+      {
+        "word": "information",
+        "vi": "thông tin"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "en": "Manage my life better",
+    "pho": "/ˈmænɪdʒ maɪ laɪf ˈbetə/",
+    "vi": "Quản lý cuộc sống của mình tốt hơn",
+    "example": "Using a daily planner helps me manage my life better.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Manage",
+        "vi": "quản lý"
+      },
+      {
+        "word": "my",
+        "vi": "của tôi"
+      },
+      {
+        "word": "life",
+        "vi": "cuộc sống"
+      },
+      {
+        "word": "better",
+        "vi": "tốt hơn"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "en": "Make it a priority for me",
+    "pho": "/meɪk ɪt ə praɪˈɒrəti fə mi/",
+    "vi": "Coi đó là ưu tiên hàng đầu của tôi",
+    "example": "I will make it a priority for me to exercise daily from now on.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Make",
+        "vi": "tạo ra"
+      },
+      {
+        "word": "it",
+        "vi": "nó"
+      },
+      {
+        "word": "a",
+        "vi": "một"
+      },
+      {
+        "word": "priority",
+        "vi": "sự ưu tiên"
+      },
+      {
+        "word": "for",
+        "vi": "cho"
+      },
+      {
+        "word": "me",
+        "vi": "tôi"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "en": "A part of my routine",
+    "pho": "/ə pɑːt əv maɪ ruːˈtiːn/",
+    "vi": "Một phần trong thói quen sinh hoạt hàng ngày",
+    "example": "Reading 20 pages before bed has become a part of my routine.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "A",
+        "vi": "một"
+      },
+      {
+        "word": "part",
+        "vi": "phần"
+      },
+      {
+        "word": "of",
+        "vi": "của"
+      },
+      {
+        "word": "my",
+        "vi": "của tôi"
+      },
+      {
+        "word": "routine",
+        "vi": "thói quen"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "en": "Keep updated with",
+    "pho": "/kiːp ʌpˈdeɪtɪd wɪð/",
+    "vi": "Cập nhật liên tục về (vấn đề gì đó)",
+    "example": "I read the newspaper every morning to keep updated with current events.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Keep",
+        "vi": "giữ"
+      },
+      {
+        "word": "updated",
+        "vi": "cập nhật"
+      },
+      {
+        "word": "with",
+        "vi": "với"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "en": "Buy necessities",
+    "pho": "/baɪ nəˈsesətiz/",
+    "vi": "Mua sắm các nhu yếu phẩm",
+    "example": "We went to the supermarket to buy necessities for the week.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Buy",
+        "vi": "mua"
+      },
+      {
+        "word": "necessities",
+        "vi": "nhu yếu phẩm"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "en": "Spend much time on sth",
+    "pho": "/spend mʌtʃ taɪm ɒn ˈsʌmθɪŋ/",
+    "vi": "Dành nhiều thời gian cho việc gì đó",
+    "example": "Try not to spend much time on scrolling through social media.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Spend",
+        "vi": "dành"
+      },
+      {
+        "word": "much",
+        "vi": "nhiều"
+      },
+      {
+        "word": "time",
+        "vi": "thời gian"
+      },
+      {
+        "word": "on",
+        "vi": "trên"
+      },
+      {
+        "word": "sth",
+        "vi": "điều gì đó"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "en": "Meet the deadlines",
+    "pho": "/miːt ðə ˈdedlaɪnz/",
+    "vi": "Kịp tiến độ / Hoàn thành đúng thời hạn",
+    "example": "Working overtime helped the team meet the deadlines for the project.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Meet",
+        "vi": "gặp gỡ"
+      },
+      {
+        "word": "the",
+        "vi": "cái (mạo từ)"
+      },
+      {
+        "word": "deadlines",
+        "vi": "hạn chót"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "en": "Reduce pollution",
+    "pho": "/rɪˈdjuːs pəˈluːʃn/",
+    "vi": "Giảm thiểu ô nhiễm",
+    "example": "Using public transport instead of personal cars can significantly reduce pollution.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Reduce",
+        "vi": "giảm thiểu"
+      },
+      {
+        "word": "pollution",
+        "vi": "ô nhiễm"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "en": "Decrease traffic congestion",
+    "pho": "/dɪˈkriːs ˈtræfɪk kənˈdʒestʃən/",
+    "vi": "Giảm tình trạng ùn tắc giao thông",
+    "example": "Building new overpasses will help decrease traffic congestion in the city.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Decrease",
+        "vi": "làm giảm"
+      },
+      {
+        "word": "traffic",
+        "vi": "giao thông"
+      },
+      {
+        "word": "congestion",
+        "vi": "sự tắc nghẽn"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "en": "Costs an arm and a leg",
+    "pho": "/kɒsts ən ɑːm ənd ə leɡ/",
+    "vi": "Đắt cắt cổ / Đắt đỏ vô cùng",
+    "example": "Buying a new apartment in the center of the city costs an arm and a leg.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Costs",
+        "vi": "tốn kém"
+      },
+      {
+        "word": "an",
+        "vi": "một"
+      },
+      {
+        "word": "arm",
+        "vi": "cánh tay"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "a",
+        "vi": "một"
+      },
+      {
+        "word": "leg",
+        "vi": "chân"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "en": "I'm hopeless / terrible at sth",
+    "pho": "/aɪm ˈhəʊpləs / ˈterəbl ət ˈsʌmθɪŋ/",
+    "vi": "Tôi cực kỳ yếu kém / rất dở ở mảng nào đó",
+    "example": "I'm hopeless at playing the piano.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "I",
+        "vi": "tôi"
+      },
+      {
+        "word": "m",
+        "vi": "là"
+      },
+      {
+        "word": "hopeless",
+        "vi": "vô vọng"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "en": "I strongly disagree with",
+    "pho": "/aɪ ˈstrɒŋli ˌdɪsəˈɡriː wɪð/",
+    "vi": "Tôi hoàn toàn không đồng ý với",
+    "example": "I strongly disagree with your opinion on the matter.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "I",
+        "vi": "tôi"
+      },
+      {
+        "word": "strongly",
+        "vi": "mạnh mẽ"
+      },
+      {
+        "word": "disagree",
+        "vi": "không đồng ý"
+      },
+      {
+        "word": "with",
+        "vi": "với"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "en": "I find it difficult to do sth",
+    "pho": "/aɪ faɪnd ɪt ˈdɪfɪkəlt tə duː ˈsʌmθɪŋ/",
+    "vi": "Tôi thấy thật khó để làm việc gì đó",
+    "example": "I find it difficult to understand complex mathematical problems.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "I",
+        "vi": "tôi"
+      },
+      {
+        "word": "find",
+        "vi": "nhận thấy"
+      },
+      {
+        "word": "it",
+        "vi": "nó"
+      },
+      {
+        "word": "difficult",
+        "vi": "khó khăn"
+      },
+      {
+        "word": "to",
+        "vi": "để"
+      },
+      {
+        "word": "do",
+        "vi": "làm"
+      },
+      {
+        "word": "sth",
+        "vi": "điều gì đó"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "en": "Be in a bad mood",
+    "pho": "/bi ɪn ə bæd muːd/",
+    "vi": "Đang có tâm trạng không tốt / Đang bực bội",
+    "example": "He seems to be in a bad mood today; maybe something happened at work.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Be",
+        "vi": "là"
+      },
+      {
+        "word": "in",
+        "vi": "trong"
+      },
+      {
+        "word": "a",
+        "vi": "một"
+      },
+      {
+        "word": "bad",
+        "vi": "tồi tệ"
+      },
+      {
+        "word": "mood",
+        "vi": "tâm trạng"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "en": "Do harm to sth",
+    "pho": "/duː hɑːm tə ˈsʌmθɪŋ/",
+    "vi": "Gây hại cho điều gì đó",
+    "example": "Smoking can do harm to your lungs and overall respiratory system.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Do",
+        "vi": "làm"
+      },
+      {
+        "word": "harm",
+        "vi": "tổn hại"
+      },
+      {
+        "word": "to",
+        "vi": "để"
+      },
+      {
+        "word": "sth",
+        "vi": "điều gì đó"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "en": "Feel guilty about",
+    "pho": "/fiːl ˈɡɪlti əˈbaʊt/",
+    "vi": "Cảm thấy có lỗi / áy náy về",
+    "example": "She feels guilty about forgetting her friend's birthday.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Feel",
+        "vi": "cảm thấy"
+      },
+      {
+        "word": "guilty",
+        "vi": "có lỗi"
+      },
+      {
+        "word": "about",
+        "vi": "về"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "en": "Primarily cause health problems, such as obesity, diabetes, and heart disease.",
+    "pho": "/praɪˈmerəli kɔːz helθ ˈprɒbləmz, sʌtʃ əz əʊˈbiːsəti, ˌdaɪəˈbiːtiːz, ənd hɑːt dɪˈziːz/",
+    "vi": "Chủ yếu gây ra các vấn đề sức khỏe như béo phì, tiểu đường và bệnh tim.",
+    "example": "Consuming excessive sugar can primarily cause health problems, such as obesity, diabetes, and heart disease.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Primarily",
+        "vi": "chủ yếu"
+      },
+      {
+        "word": "cause",
+        "vi": "gây ra"
+      },
+      {
+        "word": "health",
+        "vi": "sức khỏe"
+      },
+      {
+        "word": "problems",
+        "vi": "vấn đề"
+      },
+      {
+        "word": "such",
+        "vi": "như"
+      },
+      {
+        "word": "as",
+        "vi": "như là"
+      },
+      {
+        "word": "obesity",
+        "vi": "béo phì"
+      },
+      {
+        "word": "diabetes",
+        "vi": "tiểu đường"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "heart",
+        "vi": "tim"
+      },
+      {
+        "word": "disease",
+        "vi": "bệnh tật"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "en": "Negatively affect / impact / influence sth (people's lives)",
+    "pho": "/ˈneɡətɪvli əˈfekt / ˈɪmpækt / ˈɪnfluəns ˈsʌmθɪŋ/",
+    "vi": "Tác động tiêu cực đến (cuộc sống của con người)",
+    "example": "Excessive use of electronic devices can negatively affect people's sleep patterns.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Negatively",
+        "vi": "tiêu cực"
+      },
+      {
+        "word": "affect",
+        "vi": "ảnh hưởng"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "en": "Significantly influence / affect / impact people's physical and mental health",
+    "pho": "/sɪɡˈnɪfɪkəntli ˈɪnfluəns / əˈfekt / ˈɪmpækt ˈpiːplz ˈfɪzɪkl ənd ˈmentl helθ/",
+    "vi": "Ảnh hưởng nghiêm trọng đến sức khỏe thể chất và tinh thần của con người",
+    "example": "Stress and anxiety can significantly influence people's physical and mental health.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Significantly",
+        "vi": "đáng kể"
+      },
+      {
+        "word": "influence",
+        "vi": "ảnh hưởng"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "en": "Lead to a lack of sth",
+    "pho": "/liːd tu ə læk əv ˈsʌmθɪŋ/",
+    "vi": "Dẫn đến tình trạng thiếu hụt điều gì đó",
+    "example": "Lack of exercise can lead to a lack of physical fitness and overall well-being.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Lead",
+        "vi": "dẫn đến"
+      },
+      {
+        "word": "to",
+        "vi": "để"
+      },
+      {
+        "word": "a",
+        "vi": "một"
+      },
+      {
+        "word": "lack",
+        "vi": "sự thiếu hụt"
+      },
+      {
+        "word": "of",
+        "vi": "của"
+      },
+      {
+        "word": "sth",
+        "vi": "điều gì đó"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "en": "Waste time and money",
+    "pho": "/weɪst taɪm ənd ˈmʌni/",
+    "vi": "Lãng phí thời gian và tiền bạc",
+    "example": "Don't waste your time on activities that don't contribute to your goals.",
+    "category": "Tuần 1",
+    "details": [
+      {
+        "word": "Waste",
+        "vi": "lãng phí"
+      },
+      {
+        "word": "time",
+        "vi": "thời gian"
+      },
+      {
+        "word": "and",
+        "vi": "và"
+      },
+      {
+        "word": "money",
+        "vi": "tiền bạc"
+      }
+    ]
+  }
 ]

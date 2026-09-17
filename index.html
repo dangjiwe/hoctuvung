@@ -229,6 +229,24 @@
   .match-card.selected { border-color: var(--chalk); background: #fffbeb; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15); }
   .match-card.matched { border-color: var(--correct); background: #f0fdf4; opacity: .5; pointer-events: none; }
   .match-card.wrong { border-color: var(--wrong); background: #fef2f2; animation: shake 0.4s; }
+
+  /* ---------- Builder ---------- */
+  .bd-word {
+    background: white; border: 2px solid #e2e8f0; border-radius: 10px; padding: 10px 14px;
+    cursor: pointer; font-size: 16px; font-weight: 500; color: var(--ink);
+    transition: all .2s; display: flex; flex-direction: column; align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); user-select: none;
+  }
+  .bd-word:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+  .bd-word.used { opacity: 0; pointer-events: none; transform: scale(0.9); }
+  .bd-word-hint { font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 400; text-align: center; }
+  .bd-target-word {
+    background: var(--accent); color: white; border-radius: 8px; padding: 8px 12px;
+    font-size: 16px; font-weight: 500; cursor: pointer; animation: popIn 0.2s; transition: transform .1s;
+  }
+  .bd-target-word:active { transform: scale(0.9); }
+  @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-4px); }
@@ -294,6 +312,7 @@
   <div class="tabs" role="tablist">
     <button class="tab active" data-mode="flashcard" onclick="switchMode('flashcard', this)">Thẻ ghi nhớ</button>
     <button class="tab" data-mode="quiz" onclick="switchMode('quiz', this)">Trắc nghiệm</button>
+    <button class="tab" data-mode="builder" onclick="switchMode('builder', this)">Xếp câu</button>
     <button class="tab" data-mode="dictation" onclick="switchMode('dictation', this)">Chính tả</button>
     <button class="tab" data-mode="matching" onclick="switchMode('matching', this)">Ghép thẻ</button>
     <button class="tab" data-mode="pronunciation" onclick="switchMode('pronunciation', this)">Phát âm</button>
@@ -325,19 +344,63 @@
     <!-- 2. QUIZ -->
     <div id="quiz-mode" class="mode-section">
       <h2>Chọn nghĩa tiếng Anh đúng</h2>
-      <p class="mode-sub">Từ nào chưa thuộc sẽ xuất hiện nhiều hơn</p>
-      <div class="word-vi" id="qz-vi" style="font-size:22px;font-weight:600;color:var(--accent-dark); line-height:1.4;"></div>
-      <div class="quiz-options" id="qz-options"></div>
-      <button class="btn btn-primary" style="margin-top:20px;" onclick="loadQuiz()">Câu hỏi mới 🔄</button>
+      <p class="mode-sub">Hoàn thành bài kiểm tra để đánh giá trí nhớ của bạn</p>
+      
+      <div id="qz-progress-container" class="progress-row" style="display:none;">
+        <span id="qz-progress-label">1 / 1</span>
+        <div class="progress-track"><div class="progress-fill" id="qz-progress-fill"></div></div>
+      </div>
+
+      <div id="qz-content">
+        <div class="word-vi" id="qz-vi" style="font-size:22px;font-weight:600;color:var(--accent-dark); line-height:1.4;"></div>
+        <div class="quiz-options" id="qz-options"></div>
+      </div>
+
+      <div id="qz-summary" style="display:none; text-align: center; padding: 20px 10px;">
+        <div style="font-size: 50px; margin-bottom: 16px;">🏆</div>
+        <h3 id="qz-summary-text" style="color: var(--ink); margin-bottom: 24px; font-size: 18px;"></h3>
+        <button class="btn btn-primary" onclick="startQuizSession()">Làm lại bài 🔄</button>
+      </div>
     </div>
 
-    <!-- 3. DICTATION -->
+    <!-- 3. BUILDER (XẾP CÂU) -->
+    <div id="builder-mode" class="mode-section">
+      <h2>Luyện xếp câu</h2>
+      <p class="mode-sub">Bấm vào các thẻ bên dưới để ghép thành câu hoàn chỉnh</p>
+      
+      <div class="progress-row">
+        <span id="bd-progress-label">1 / 1</span>
+        <div class="progress-track"><div class="progress-fill" id="bd-progress-fill"></div></div>
+      </div>
+
+      <div class="word-vi" id="bd-vi" style="font-size:18px; font-weight:600; color:var(--accent-dark); margin-bottom: 24px; text-align: center;"></div>
+      
+      <div id="bd-target" style="min-height: 60px; padding: 14px; border: 2px dashed #cbd5e1; border-radius: 12px; margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #f8fafc;">
+      </div>
+
+      <div id="bd-source" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+      </div>
+
+      <div id="bd-result" class="result-text" aria-live="polite" style="margin-top: 20px; text-align: center;"></div>
+      
+      <div style="display: flex; justify-content: center; gap: 12px; margin-top: 16px;">
+        <button class="btn btn-warning" onclick="resetBuilder()">Làm lại</button>
+        <button class="btn btn-primary" id="bd-next-btn" onclick="nextVocab('builder')" style="display:none;">Câu tiếp theo 🔄</button>
+      </div>
+    </div>
+
+    <!-- 4. DICTATION -->
     <div id="dictation-mode" class="mode-section">
       <h2>Kiểm tra chính tả</h2>
       <p class="mode-sub">Gõ lại từ tiếng Anh có nghĩa dưới đây</p>
       <div class="word-vi" id="dict-vi" style="font-size:22px;font-weight:600;color:var(--accent-dark);"></div>
       <input type="text" id="dict-input" class="dict-input" placeholder="Gõ tiếng Anh vào đây..." autocomplete="off" onkeypress="handleDictationKeyPress(event)">
-      <div>
+      <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+        <select id="dict-speed" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; outline: none; background: #f8fafc; font-size: 13.5px; cursor: pointer; color: var(--ink);">
+          <option value="1">Tốc độ: 1x</option>
+          <option value="0.8">Tốc độ: 0.8x</option>
+          <option value="0.6">Tốc độ: 0.6x</option>
+        </select>
         <button class="btn btn-info" onclick="playAudioDictation()">🔊 Nghe gợi ý</button>
         <button class="btn btn-success" onclick="checkDictation()">Kiểm tra</button>
       </div>
@@ -365,8 +428,13 @@
       </div>
       <div class="word-en" id="pr-en"></div>
       <div class="word-vi" id="pr-vi"></div>
-      <div>
-        <button class="btn btn-info" onclick="playAudio(currentWord().en)">🔊 Nghe mẫu</button>
+      <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 14px;">
+        <select id="pr-speed" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; outline: none; background: #f8fafc; font-size: 13.5px; cursor: pointer; color: var(--ink);">
+          <option value="1">Tốc độ: 1x</option>
+          <option value="0.8">Tốc độ: 0.8x</option>
+          <option value="0.6">Tốc độ: 0.6x</option>
+        </select>
+        <button class="btn btn-info" onclick="playAudio(currentWord().en, parseFloat(document.getElementById('pr-speed').value))">🔊 Nghe mẫu</button>
         <button class="btn btn-warning" onclick="startRecording()">🎤 Bấm để đọc</button>
       </div>
       <div id="pr-status" class="result-text" aria-live="polite"></div>
@@ -424,8 +492,12 @@
   let progress = loadJSON(STORAGE_PROGRESS, { learned: {}, quizCorrect: 0, quizTotal: 0, streak: 0, lastDate: null });
 
   let currentIndex = 0;
-  let lastQuizId = null;
   let lastDictId = null;
+  
+  // Quiz State
+  let quizSession = [];
+  let quizCurrentIndex = 0;
+  let quizCorrectCount = 0;
 
   function loadJSON(key, fallback) {
     try {
@@ -509,7 +581,7 @@
     const bar = document.getElementById('stats-bar');
     bar.innerHTML = `
       <span class="stat-chip">🔥 Chuỗi ngày: <b>${progress.streak}</b></span>
-      <span class="stat-chip">✅ Đã thuộc: <b>${learnedCount}/${vocabList.length}</b></span>
+      <span class="stat-chip">✅ Đã thuộc: <b>${learnedCount}/${allVocab.length}</b></span>
       <span class="stat-chip">🎯 Trắc nghiệm: <b>${accuracy === null ? '—' : accuracy + '%'}</b></span>
     `;
   }
@@ -543,7 +615,8 @@
     if (btn) btn.classList.add('active');
 
     if (mode === 'flashcard') loadFlashcard();
-    if (mode === 'quiz') loadQuiz();
+    if (mode === 'builder') loadBuilder();
+    if (mode === 'quiz') startQuizSession();
     if (mode === 'dictation') loadDictation();
     if (mode === 'matching') loadMatching();
     if (mode === 'pronunciation') loadPronunciation();
@@ -575,24 +648,151 @@
     if (vocabList.length === 0) return;
     currentIndex = (currentIndex + 1) % vocabList.length;
     if (mode === 'flashcard') loadFlashcard();
+    if (mode === 'builder') loadBuilder();
     if (mode === 'pronunciation') loadPronunciation();
   }
   function prevVocab(mode) {
     if (vocabList.length === 0) return;
     currentIndex = (currentIndex - 1 + vocabList.length) % vocabList.length;
     if (mode === 'flashcard') loadFlashcard();
+    if (mode === 'builder') loadBuilder();
     if (mode === 'pronunciation') loadPronunciation();
   }
 
+  // --- 1.5. XẾP CÂU (BUILDER) ---
+  let builderTargetWords = [];
+  let builderSourceWords = [];
+  
+  function loadBuilder() {
+    if (vocabList.length === 0) return;
+    const word = currentWord();
+    document.getElementById('bd-vi').innerText = word.vi;
+    document.getElementById('bd-progress-label').innerText = `${currentIndex + 1} / ${vocabList.length}`;
+    document.getElementById('bd-progress-fill').style.width = `${((currentIndex + 1) / vocabList.length) * 100}%`;
+    document.getElementById('bd-result').innerText = '';
+    document.getElementById('bd-result').className = 'result-text';
+    document.getElementById('bd-next-btn').style.display = 'none';
+
+    builderTargetWords = [];
+    
+    let details = word.details;
+    if (!details) {
+      details = word.en.split('/')[0].trim().split(/\s+/).map(w => ({ word: w, vi: '' }));
+    }
+    
+    builderSourceWords = shuffleArray([...details]).map((d, idx) => ({ ...d, originalId: idx, used: false }));
+    renderBuilder();
+  }
+
+  function renderBuilder() {
+    const targetContainer = document.getElementById('bd-target');
+    const sourceContainer = document.getElementById('bd-source');
+    
+    targetContainer.innerHTML = '';
+    builderTargetWords.forEach((item, index) => {
+      const btn = document.createElement('div');
+      btn.className = 'bd-target-word';
+      btn.innerText = item.word;
+      btn.onclick = () => {
+        const sourceItem = builderSourceWords.find(s => s.originalId === item.originalId);
+        if (sourceItem) sourceItem.used = false;
+        builderTargetWords.splice(index, 1);
+        renderBuilder();
+      };
+      targetContainer.appendChild(btn);
+    });
+
+    sourceContainer.innerHTML = '';
+    builderSourceWords.forEach((item) => {
+      const btn = document.createElement('div');
+      btn.className = 'bd-word' + (item.used ? ' used' : '');
+      
+      const spanEn = document.createElement('span');
+      spanEn.innerText = item.word;
+      btn.appendChild(spanEn);
+
+      if (item.vi) {
+        const spanVi = document.createElement('span');
+        spanVi.className = 'bd-word-hint';
+        spanVi.innerText = item.vi;
+        btn.appendChild(spanVi);
+      }
+
+      btn.onclick = () => {
+        if (item.used) return;
+        item.used = true;
+        builderTargetWords.push(item);
+        renderBuilder();
+        checkBuilder();
+      };
+      sourceContainer.appendChild(btn);
+    });
+  }
+
+  function checkBuilder() {
+    if (builderTargetWords.length !== builderSourceWords.length) return;
+    
+    const word = currentWord();
+    const correctEn = word.details 
+      ? word.details.map(d => d.word.toLowerCase()).join(' ') 
+      : word.en.split('/')[0].toLowerCase().replace(/[^a-z0-9 ]/g, '').trim().replace(/\s+/g, ' ');
+      
+    const userEn = builderTargetWords.map(t => t.word.toLowerCase()).join(' ');
+
+    const resultEl = document.getElementById('bd-result');
+    if (userEn === correctEn) {
+      resultEl.innerText = "Chính xác! 🎉";
+      resultEl.className = "result-text text-success";
+      document.getElementById('bd-next-btn').style.display = 'inline-block';
+      playAudio(word.en);
+    } else {
+      resultEl.innerText = "Chưa đúng, hãy thử sắp xếp lại nhé!";
+      resultEl.className = "result-text text-danger";
+    }
+  }
+
+  function resetBuilder() {
+    builderSourceWords.forEach(s => s.used = false);
+    builderTargetWords = [];
+    document.getElementById('bd-result').innerText = '';
+    document.getElementById('bd-result').className = 'result-text';
+    document.getElementById('bd-next-btn').style.display = 'none';
+    renderBuilder();
+  }
+
   // --- 2. TRẮC NGHIỆM ---
-  function loadQuiz() {
+  function startQuizSession() {
     if (vocabList.length < 2) {
       document.getElementById('qz-options').innerHTML = '<p class="vocab-empty">Cần ít nhất 2 từ vựng để chơi.</p>';
+      document.getElementById('qz-progress-container').style.display = 'none';
       return;
     }
-    const correctWord = pickWeighted(lastQuizId);
-    lastQuizId = correctWord.id;
+    
+    quizSession = shuffleArray([...vocabList]);
+    quizCurrentIndex = 0;
+    quizCorrectCount = 0;
+    
+    document.getElementById('qz-progress-container').style.display = 'flex';
+    document.getElementById('qz-summary').style.display = 'none';
+    document.getElementById('qz-content').style.display = 'block';
+    
+    loadQuizQuestion();
+  }
+
+  function loadQuizQuestion() {
+    if (quizCurrentIndex >= quizSession.length) {
+      document.getElementById('qz-content').style.display = 'none';
+      document.getElementById('qz-progress-container').style.display = 'none';
+      document.getElementById('qz-summary').style.display = 'block';
+      document.getElementById('qz-summary-text').innerText = `Bạn đã trả lời đúng ${quizCorrectCount} / ${quizSession.length} câu!`;
+      return;
+    }
+
+    const correctWord = quizSession[quizCurrentIndex];
     document.getElementById('qz-vi').innerText = correctWord.vi;
+    
+    document.getElementById('qz-progress-label').innerText = `${quizCurrentIndex + 1} / ${quizSession.length}`;
+    document.getElementById('qz-progress-fill').style.width = `${((quizCurrentIndex + 1) / quizSession.length) * 100}%`;
 
     let tempVocab = shuffleArray(vocabList.filter(v => v.id !== correctWord.id));
     let options = [correctWord, ...tempVocab.slice(0, Math.min(3, tempVocab.length))];
@@ -610,12 +810,18 @@
         if (opt.id === correctWord.id) {
           btn.classList.add('correct');
           progress.quizCorrect++;
+          quizCorrectCount++;
         } else {
           btn.classList.add('wrong');
           document.querySelectorAll('.quiz-btn').forEach(b => { if (b.innerText === correctWord.en) b.classList.add('correct'); });
         }
         saveProgress();
         renderStats();
+        
+        setTimeout(() => {
+          quizCurrentIndex++;
+          loadQuizQuestion();
+        }, 1200);
       };
       optionsContainer.appendChild(btn);
     });
@@ -634,7 +840,12 @@
     document.getElementById('dict-input').focus();
   }
 
-  function playAudioDictation() { if (currentDictWord) playAudio(currentDictWord.en); }
+  function playAudioDictation() { 
+    if (currentDictWord) {
+      const speed = parseFloat(document.getElementById('dict-speed').value) || 1;
+      playAudio(currentDictWord.en, speed); 
+    }
+  }
 
   function checkDictation() {
     if (!currentDictWord) return;
@@ -748,11 +959,12 @@
     document.getElementById('pr-progress-fill').style.width = `${((currentIndex + 1) / vocabList.length) * 100}%`;
   }
 
-  function playAudio(text) {
+  function playAudio(text, speed = 1) {
     if ('speechSynthesis' in window) {
       const cleanText = text.replace(/\/.+\//, '').replace('sth', 'something');
       const utterance = new SpeechSynthesisUtterance(cleanText);
       utterance.lang = 'en-US';
+      utterance.rate = speed;
       window.speechSynthesis.speak(utterance);
     } else {
       alert('Trình duyệt không hỗ trợ phát âm thanh.');
