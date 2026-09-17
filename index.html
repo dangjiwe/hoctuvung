@@ -497,6 +497,43 @@
     pronunciation: 0
   };
   let lastDictId = null;
+  // --- SOUND EFFECTS ---
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function playSoundEffect(type) {
+    if (!audioCtx) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    if (type === 'correct') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+      osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+      
+      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+      
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 0.3);
+    } else if (type === 'wrong') {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2);
+      
+      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+      
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 0.2);
+    }
+  }
+
   
   // Quiz State
   let quizSession = [];
@@ -642,7 +679,13 @@
     document.getElementById('fc-progress-label').innerText = `${currentIndices.flashcard + 1} / ${vocabList.length}`;
     document.getElementById('fc-progress-fill').style.width = `${((currentIndices.flashcard + 1) / vocabList.length) * 100}%`;
   }
-  function toggleFlashcard() { document.getElementById('fc-vi').classList.toggle('hide'); }
+  function toggleFlashcard() { 
+    const viEl = document.getElementById('fc-vi');
+    viEl.classList.toggle('hide'); 
+    if (!viEl.classList.contains('hide')) {
+      playAudio(currentWord('flashcard').en);
+    }
+  }
 
   function markWord(known) {
     const word = currentWord('flashcard');
@@ -751,11 +794,13 @@
     if (userEn === correctEn) {
       resultEl.innerText = "Chính xác! 🎉";
       resultEl.className = "result-text text-success";
+      playSoundEffect('correct');
       document.getElementById('bd-next-btn').style.display = 'inline-block';
       playAudio(word.en);
     } else {
       resultEl.innerText = "Chưa đúng, hãy thử sắp xếp lại nhé!";
       resultEl.className = "result-text text-danger";
+      playSoundEffect('wrong');
     }
   }
 
@@ -819,9 +864,11 @@
           btn.classList.add('correct');
           progress.quizCorrect++;
           quizCorrectCount++;
+          playSoundEffect('correct');
         } else {
           btn.classList.add('wrong');
           document.querySelectorAll('.quiz-btn').forEach(b => { if (b.innerText === correctWord.en) b.classList.add('correct'); });
+          playSoundEffect('wrong');
         }
         saveProgress();
         renderStats();
@@ -864,9 +911,11 @@
     if (userInput === target) {
       resultEl.innerText = "Chính xác! 🎉";
       resultEl.className = "result-text text-success";
+      playSoundEffect('correct');
     } else {
       resultEl.innerText = `Chưa đúng! Đáp án là: "${currentDictWord.en}"`;
       resultEl.className = "result-text text-danger";
+      playSoundEffect('wrong');
     }
   }
   function handleDictationKeyPress(e) { if (e.key === 'Enter') checkDictation(); }
@@ -940,12 +989,14 @@
         matchSelectedEn.classList.replace('selected', 'matched');
         matchSelectedVi.classList.replace('selected', 'matched');
         matchPairsFound++;
+        playSoundEffect('correct');
         if (matchPairsFound === currentMatchWords.length) {
           setTimeout(() => alert("Tuyệt vời! Bạn đã ghép đúng tất cả."), 300);
         }
       } else {
         const tempEn = matchSelectedEn; const tempVi = matchSelectedVi;
         tempEn.classList.add('wrong'); tempVi.classList.add('wrong');
+        playSoundEffect('wrong');
         setTimeout(() => {
           tempEn.classList.remove('wrong', 'selected');
           tempVi.classList.remove('wrong', 'selected');
@@ -1026,9 +1077,13 @@
       let heardText = spokenText.toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
 
       if (heardText.includes(targetText) || targetText.includes(heardText)) {
-        statusEl.innerText = "Chính xác! 🎉"; statusEl.className = "result-text text-success";
+        statusEl.innerText = "Chính xác! 🎉";
+        statusEl.className = "result-text text-success";
+        playSoundEffect('correct');
       } else {
-        statusEl.innerText = "Chưa chuẩn, thử lại nhé! ❌"; statusEl.className = "result-text text-danger";
+        statusEl.innerText = "Chưa chính xác, thử lại nhé!";
+        statusEl.className = "result-text text-danger";
+        playSoundEffect('wrong');
       }
     };
     recognition.onerror = (event) => {
