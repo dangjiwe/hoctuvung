@@ -243,7 +243,13 @@
         <p>Luyện từ vựng tiếng Anh mỗi ngày</p>
       </div>
     </div>
-    <div class="stats" id="stats-bar"></div>
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+      <select id="category-select" onchange="changeCategory(this.value)" style="padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); color: white; font-family: var(--sans); font-size: 13px; outline: none; cursor: pointer;">
+        <option value="all" style="color: black;">Tất cả từ vựng</option>
+        <option value="custom" style="color: black;">Từ vựng tự thêm</option>
+      </select>
+      <div class="stats" id="stats-bar"></div>
+    </div>
   </header>
 
   <div class="tabs" role="tablist">
@@ -372,7 +378,9 @@
 
   let defaultVocab = [];
   let customVocab = loadJSON(STORAGE_CUSTOM, []);
+  let allVocab = [];
   let vocabList = [];
+  let currentCategory = 'all';
 
   let progress = loadJSON(STORAGE_PROGRESS, { learned: {}, quizCorrect: 0, quizTotal: 0, streak: 0, lastDate: null });
 
@@ -390,8 +398,58 @@
   function saveProgress() { localStorage.setItem(STORAGE_PROGRESS, JSON.stringify(progress)); }
 
   function rebuildVocabList() {
-    vocabList = [...defaultVocab, ...customVocab];
+    allVocab = [...defaultVocab, ...customVocab];
+    
+    // Build category dropdown
+    const select = document.getElementById('category-select');
+    const categories = new Set();
+    defaultVocab.forEach(w => { if (w.category) categories.add(w.category); });
+    
+    // Save current selection to restore after rebuild
+    const oldVal = select.value;
+    
+    select.innerHTML = '<option value="all" style="color: black;">Tất cả từ vựng</option><option value="custom" style="color: black;">Từ vựng tự thêm</option>';
+    categories.forEach(cat => {
+      const opt = document.createElement('option');
+      opt.value = cat;
+      opt.innerText = cat;
+      opt.style.color = 'black';
+      select.appendChild(opt);
+    });
+    
+    // Restore selection if still exists
+    if ([...select.options].some(o => o.value === oldVal)) {
+        select.value = oldVal;
+    } else {
+        select.value = 'all';
+    }
+    
+    currentCategory = select.value;
+    applyCategoryFilter();
+  }
+
+  function changeCategory(cat) {
+    currentCategory = cat;
+    applyCategoryFilter();
+  }
+
+  function applyCategoryFilter() {
+    if (currentCategory === 'all') {
+      vocabList = [...allVocab];
+    } else if (currentCategory === 'custom') {
+      vocabList = [...customVocab];
+    } else {
+      vocabList = allVocab.filter(w => w.category === currentCategory);
+    }
     if (currentIndex >= vocabList.length) currentIndex = 0;
+    
+    // Refresh UI
+    renderStats();
+    
+    const activeTab = document.querySelector('.tab.active');
+    if (activeTab) {
+      switchMode(activeTab.dataset.mode, activeTab);
+    }
   }
 
   function currentWord() { return vocabList[currentIndex]; }
@@ -781,7 +839,7 @@
       } else {
         const tag = document.createElement('span');
         tag.style.cssText = 'font-size:11px;color:var(--muted);border:1px solid #E0DACB;padding:3px 8px;border-radius:12px;';
-        tag.innerText = 'Mặc định (data.json)';
+        tag.innerText = word.category || 'Mặc định';
         row.appendChild(tag);
       }
       container.appendChild(row);
