@@ -434,7 +434,7 @@
           <option value="0.8">Tốc độ: 0.8x</option>
           <option value="0.6">Tốc độ: 0.6x</option>
         </select>
-        <button class="btn btn-info" onclick="playAudio(currentWord().en, parseFloat(document.getElementById('pr-speed').value))">🔊 Nghe mẫu</button>
+        <button class="btn btn-info" onclick="playAudio(currentWord('pronunciation').en, parseFloat(document.getElementById('pr-speed').value))">🔊 Nghe mẫu</button>
         <button class="btn btn-warning" onclick="startRecording()">🎤 Bấm để đọc</button>
       </div>
       <div id="pr-status" class="result-text" aria-live="polite"></div>
@@ -491,7 +491,11 @@
 
   let progress = loadJSON(STORAGE_PROGRESS, { learned: {}, quizCorrect: 0, quizTotal: 0, streak: 0, lastDate: null });
 
-  let currentIndex = 0;
+  let currentIndices = {
+    flashcard: 0,
+    builder: 0,
+    pronunciation: 0
+  };
   let lastDictId = null;
   
   // Quiz State
@@ -552,7 +556,9 @@
     } else {
       vocabList = allVocab.filter(w => w.category === currentCategory);
     }
-    if (currentIndex >= vocabList.length) currentIndex = 0;
+    Object.keys(currentIndices).forEach(k => {
+      if (currentIndices[k] >= vocabList.length) currentIndices[k] = 0;
+    });
     
     // Refresh UI
     renderStats();
@@ -563,7 +569,9 @@
     }
   }
 
-  function currentWord() { return vocabList[currentIndex]; }
+  function currentWord(mode = 'flashcard') { 
+    return vocabList[currentIndices[mode]] || vocabList[0]; 
+  }
 
   function updateStreak() {
     const today = new Date().toDateString();
@@ -626,18 +634,18 @@
   // --- 1. FLASHCARD ---
   function loadFlashcard() {
     if (vocabList.length === 0) return;
-    const word = currentWord();
+    const word = currentWord('flashcard');
     document.getElementById('fc-en').innerText = word.en;
     document.getElementById('fc-pho').innerText = word.pho || '';
     document.getElementById('fc-vi').innerText = word.vi;
     document.getElementById('fc-vi').classList.add('hide');
-    document.getElementById('fc-progress-label').innerText = `${currentIndex + 1} / ${vocabList.length}`;
-    document.getElementById('fc-progress-fill').style.width = `${((currentIndex + 1) / vocabList.length) * 100}%`;
+    document.getElementById('fc-progress-label').innerText = `${currentIndices.flashcard + 1} / ${vocabList.length}`;
+    document.getElementById('fc-progress-fill').style.width = `${((currentIndices.flashcard + 1) / vocabList.length) * 100}%`;
   }
   function toggleFlashcard() { document.getElementById('fc-vi').classList.toggle('hide'); }
 
   function markWord(known) {
-    const word = currentWord();
+    const word = currentWord('flashcard');
     progress.learned[word.id] = known;
     saveProgress();
     renderStats();
@@ -646,14 +654,14 @@
 
   function nextVocab(mode) {
     if (vocabList.length === 0) return;
-    currentIndex = (currentIndex + 1) % vocabList.length;
+    currentIndices[mode] = (currentIndices[mode] + 1) % vocabList.length;
     if (mode === 'flashcard') loadFlashcard();
     if (mode === 'builder') loadBuilder();
     if (mode === 'pronunciation') loadPronunciation();
   }
   function prevVocab(mode) {
     if (vocabList.length === 0) return;
-    currentIndex = (currentIndex - 1 + vocabList.length) % vocabList.length;
+    currentIndices[mode] = (currentIndices[mode] - 1 + vocabList.length) % vocabList.length;
     if (mode === 'flashcard') loadFlashcard();
     if (mode === 'builder') loadBuilder();
     if (mode === 'pronunciation') loadPronunciation();
@@ -665,10 +673,10 @@
   
   function loadBuilder() {
     if (vocabList.length === 0) return;
-    const word = currentWord();
+    const word = currentWord('builder');
     document.getElementById('bd-vi').innerText = word.vi;
-    document.getElementById('bd-progress-label').innerText = `${currentIndex + 1} / ${vocabList.length}`;
-    document.getElementById('bd-progress-fill').style.width = `${((currentIndex + 1) / vocabList.length) * 100}%`;
+    document.getElementById('bd-progress-label').innerText = `${currentIndices.builder + 1} / ${vocabList.length}`;
+    document.getElementById('bd-progress-fill').style.width = `${((currentIndices.builder + 1) / vocabList.length) * 100}%`;
     document.getElementById('bd-result').innerText = '';
     document.getElementById('bd-result').className = 'result-text';
     document.getElementById('bd-next-btn').style.display = 'none';
@@ -732,7 +740,7 @@
   function checkBuilder() {
     if (builderTargetWords.length !== builderSourceWords.length) return;
     
-    const word = currentWord();
+    const word = currentWord('builder');
     const correctEn = word.details 
       ? word.details.map(d => d.word.toLowerCase()).join(' ') 
       : word.en.split('/')[0].toLowerCase().replace(/[^a-z0-9 ]/g, '').trim().replace(/\s+/g, ' ');
@@ -950,13 +958,13 @@
   // --- 5. LUYỆN PHÁT ÂM ---
   function loadPronunciation() {
     if (vocabList.length === 0) return;
-    const word = currentWord();
+    const word = currentWord('pronunciation');
     document.getElementById('pr-en').innerText = word.en;
     document.getElementById('pr-vi').innerText = word.vi;
     document.getElementById('pr-status').innerText = "";
     document.getElementById('pr-feedback').innerText = "";
-    document.getElementById('pr-progress-label').innerText = `${currentIndex + 1} / ${vocabList.length}`;
-    document.getElementById('pr-progress-fill').style.width = `${((currentIndex + 1) / vocabList.length) * 100}%`;
+    document.getElementById('pr-progress-label').innerText = `${currentIndices.pronunciation + 1} / ${vocabList.length}`;
+    document.getElementById('pr-progress-fill').style.width = `${((currentIndices.pronunciation + 1) / vocabList.length) * 100}%`;
   }
 
   function playAudio(text, speed = 1) {
@@ -1012,8 +1020,9 @@
 
     recognition.onresult = (event) => {
       const spokenText = event.results[0][0].transcript;
+      const transcript = spokenText.toLowerCase();
       feedbackEl.innerText = `Bạn đã đọc: "${spokenText}"`;
-      let targetText = currentWord().en.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace('sth', 'something').trim();
+      let targetText = currentWord('pronunciation').en.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace('sth', 'something').trim();
       let heardText = spokenText.toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
 
       if (heardText.includes(targetText) || targetText.includes(heardText)) {
