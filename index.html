@@ -328,6 +328,7 @@
     <button class="tab" data-mode="dictation" onclick="switchMode('dictation', this)">Chính tả</button>
     <button class="tab" data-mode="matching" onclick="switchMode('matching', this)">Ghép thẻ</button>
     <button class="tab" data-mode="pronunciation" onclick="switchMode('pronunciation', this)">Phát âm</button>
+    <button class="tab" data-mode="vstep" onclick="switchMode('vstep', this)">VSTEP Speaking</button>
     <button class="tab" data-mode="manage" onclick="switchMode('manage', this)">Từ vựng của tôi</button>
   </div>
 
@@ -454,6 +455,52 @@
       <div style="margin-top:24px;">
         <button class="btn btn-ghost" onclick="prevVocab('pronunciation')">‹ Từ trước</button>
         <button class="btn btn-ghost" onclick="nextVocab('pronunciation')">Từ tiếp theo ›</button>
+      </div>
+    </div>
+
+    <!-- 7. VSTEP SPEAKING -->
+    <div id="vstep-mode" class="mode-section">
+      <h2>Luyện VSTEP Speaking Part 1</h2>
+      <p class="mode-sub">Sử dụng AI để tạo hoặc chấm điểm các câu trả lời VSTEP</p>
+      
+      <div id="api-key-section" style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px dashed #cbd5e1; text-align: left;">
+        <h3 style="font-size: 16px; margin-top: 0;">🔑 Cần Google Gemini API Key</h3>
+        <p style="font-size: 14px; color: var(--muted); margin-bottom: 12px;">Tính năng này sử dụng AI để xử lý. Vui lòng lấy API Key miễn phí tại <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a> và nhập vào đây (Key sẽ chỉ lưu trên trình duyệt của bạn).</p>
+        <div style="display: flex; gap: 8px;">
+          <input type="password" id="gemini-api-key" placeholder="AIzaSy..." style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 14px;">
+          <button class="btn btn-primary" onclick="saveApiKey()">Lưu Key</button>
+        </div>
+      </div>
+
+      <div id="vstep-main" style="display: none; text-align: left;">
+        <div style="margin-bottom: 16px;">
+          <label style="font-weight: 600; font-size: 14px; margin-bottom: 6px; display: block;">Chế độ luyện tập:</label>
+          <select id="vstep-type" onchange="changeVstepMode()" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 14.5px; outline: none; background: white; color: var(--ink);">
+            <option value="auto">Trường hợp A: Tự động sinh theo chủ đề</option>
+            <option value="LIKE / ENJOY">Trường hợp B: Điền mẫu LIKE / ENJOY</option>
+            <option value="HOW OFTEN">Trường hợp B: Điền mẫu HOW OFTEN</option>
+            <option value="IMPORTANT">Trường hợp B: Điền mẫu IMPORTANT</option>
+            <option value="FAVORITE">Trường hợp B: Điền mẫu FAVORITE</option>
+          </select>
+        </div>
+
+        <div id="vstep-auto-input">
+          <label style="font-weight: 600; font-size: 14px; margin-bottom: 6px; display: block;">Nhập chủ đề (Từ/Cụm từ):</label>
+          <input type="text" id="vstep-topic" placeholder="Ví dụ: reading books, fast food, traveling..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 15px; outline: none;">
+        </div>
+
+        <div id="vstep-fill-input" style="display: none; background: #f1f5f9; padding: 16px; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 15.5px; line-height: 1.8;">
+        </div>
+
+        <button class="btn btn-primary" id="vstep-submit-btn" onclick="submitVstep()" style="width: 100%; margin-top: 16px; padding: 14px; font-size: 16px;">🚀 Gửi cho AI xử lý</button>
+        <button class="btn btn-warning" id="vstep-logout-btn" onclick="clearApiKey()" style="width: 100%; margin-top: 8px; padding: 10px; font-size: 14px; background: transparent; color: var(--muted); border: none; box-shadow: none;">Đổi API Key khác</button>
+        
+        <div id="vstep-loading" style="display: none; margin-top: 20px; text-align: center; color: var(--muted);">
+          Đang gọi AI, vui lòng chờ trong giây lát... ⏳
+        </div>
+
+        <div id="vstep-result" style="display: none; margin-top: 24px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+        </div>
       </div>
     </div>
 
@@ -697,6 +744,7 @@
     if (mode === 'dictation') loadDictation();
     if (mode === 'matching') loadMatching();
     if (mode === 'pronunciation') loadPronunciation();
+    if (mode === 'vstep') checkApiKey();
     if (mode === 'manage') renderVocabList();
   }
 
@@ -1328,6 +1376,203 @@
   }
 
   init();
+  // --- VSTEP SPEAKING ---
+  const STORAGE_API_KEY = 'vstep_gemini_api_key';
+  let geminiApiKey = localStorage.getItem(STORAGE_API_KEY) || '';
+
+  const vstepTemplates = {
+    "LIKE / ENJOY": [
+      "Absolutely! ", "___", " is something I'm really passionate about. I've been interested in ", "___", " for quite a long time, maybe since I was a ", "___", ". What I love most about it is that it's not just ", "___", ", but it also helps me ", "___", "."
+    ],
+    "HOW OFTEN": [
+      "Back in the days when I was a ", "___", ", I used to ", "___", " quite often. These days, because of ", "___", ", I don't ", "___", " as much as I used to. But in the future, if I have more ", "___", ", I'd definitely like to ", "___", " more often again."
+    ],
+    "IMPORTANT": [
+      "Absolutely yes, I believe it's really important for ", "___", ". As we can see, thanks to ", "___", ", people can ", "___", ". Besides, it also helps us to ", "___", " and makes our life ", "___", "."
+    ],
+    "FAVORITE": [
+      "Oh, I like various kinds of ", "___", ", so it's really hard to decide which one is my favorite. But if I had to choose one, I would say ", "___", " is the best because ", "___", ". Honestly, every time I ", "___", ", I feel ", "___", ", which makes it my top choice."
+    ]
+  };
+
+  const VSTEP_SYSTEM_PROMPT = `
+BẠN LÀ GIÁO VIÊN CHẤM THI VSTEP SPEAKING.
+4 BỘ CẤU TRÚC VSTEP CHUẨN:
+1. LIKE / ENJOY: Absolutely! ___ is something I'm really passionate about. I've been interested in ___ for quite a long time, maybe since I was a ___. What I love most about it is that it's not just ___, but it also helps me ___.
+2. HOW OFTEN: Back in the days when I was a ___, I used to ___ quite often. These days, because of ___, I don't ___ as much as I used to. But in the future, if I have more ___, I'd definitely like to ___ more often again.
+3. IMPORTANT / DO YOU THINK: Absolutely yes, I believe it's really important for ___. As we can see, thanks to ___, people can ___. Besides, it also helps us to ___ and makes our life ___.
+4. FAVORITE: Oh, I like various kinds of ___, so it's really hard to decide which one is my favorite. But if I had to choose one, I would say ___ is the best because ___. Honestly, every time I ___, I feel ___, which makes it my top choice.
+
+CHẾ ĐỘ XỬ LÝ (Dựa vào yêu cầu đầu vào của người dùng):
+TRƯỜNG HỢP A: Web tự động sinh (Input chỉ có từ/cụm từ mục tiêu)
+* Chọn cấu trúc phù hợp nhất trong 4 mẫu trên.
+* Đặt 1 câu hỏi VSTEP Part 1 phù hợp.
+* Tự động ghép từ/cụm từ đó vào vị trí chính, đồng thời điền các cụm từ tự nhiên (collocations) vào các chỗ trống còn lại.
+* Gợi ý danh sách 3-4 cụm từ hữu ích (phrases) đã dùng để lưu lại vào web.
+* Dịch đoạn văn sang tiếng Việt.
+
+TRƯỜNG HỢP B: Người dùng tự điền (Input là đoạn văn người dùng đã điền)
+* Đặt 1 câu hỏi VSTEP Part 1 phù hợp.
+* Kiểm tra tính đúng đắn về ngữ pháp, giới từ, dạng từ (V-ing, to V, danh từ) của người dùng.
+* Đưa ra bản sửa lỗi (nếu có) và đoạn hoàn chỉnh mượt mà nhất.
+* Đánh giá độ tự nhiên theo tiêu chuẩn chấm thi VSTEP.
+* Gợi ý danh sách 3-4 cụm từ hữu ích.
+* Dịch đoạn văn hoàn chỉnh sang tiếng Việt.
+
+TRẢ VỀ DUY NHẤT JSON THUẦN:
+{
+  "mode": "auto" | "user_feedback",
+  "template_used": "LIKE / ENJOY" | "HOW OFTEN" | "IMPORTANT" | "FAVORITE",
+  "vstep_question": "...",
+  "full_answer_en": "...",
+  "full_answer_vi": "...",
+  "suggested_phrases": [
+    {"phrase": "...", "meaning": "..."}
+  ],
+  "grammar_notes": "Nhận xét ngắn về ngữ pháp hoặc cách dùng từ"
+}
+`;
+
+  function checkApiKey() {
+    if (geminiApiKey) {
+      document.getElementById('api-key-section').style.display = 'none';
+      document.getElementById('vstep-main').style.display = 'block';
+    } else {
+      document.getElementById('api-key-section').style.display = 'block';
+      document.getElementById('vstep-main').style.display = 'none';
+    }
+  }
+
+  function saveApiKey() {
+    const key = document.getElementById('gemini-api-key').value.trim();
+    if (key) {
+      geminiApiKey = key;
+      localStorage.setItem(STORAGE_API_KEY, geminiApiKey);
+      checkApiKey();
+    }
+  }
+
+  function clearApiKey() {
+    geminiApiKey = '';
+    localStorage.removeItem(STORAGE_API_KEY);
+    checkApiKey();
+  }
+
+  function changeVstepMode() {
+    const mode = document.getElementById('vstep-type').value;
+    if (mode === 'auto') {
+      document.getElementById('vstep-auto-input').style.display = 'block';
+      document.getElementById('vstep-fill-input').style.display = 'none';
+    } else {
+      document.getElementById('vstep-auto-input').style.display = 'none';
+      const container = document.getElementById('vstep-fill-input');
+      container.style.display = 'block';
+      
+      const parts = vstepTemplates[mode];
+      let html = '';
+      parts.forEach(part => {
+        if (part === "___") {
+          html += `<input type="text" class="vstep-blank" style="padding: 4px 8px; border-radius: 6px; border: 1px dashed var(--accent); outline: none; width: 140px; text-align: center; font-size: 15px; color: var(--accent); font-weight: 500; background: transparent; margin: 0 4px;">`;
+        } else {
+          html += `<span>${part}</span>`;
+        }
+      });
+      container.innerHTML = html;
+    }
+    document.getElementById('vstep-result').style.display = 'none';
+  }
+
+  async function submitVstep() {
+    if (!geminiApiKey) return alert("Vui lòng nhập API Key.");
+    
+    const mode = document.getElementById('vstep-type').value;
+    let userInput = "";
+    
+    if (mode === 'auto') {
+      const topic = document.getElementById('vstep-topic').value.trim();
+      if (!topic) return alert("Vui lòng nhập chủ đề!");
+      userInput = `TRƯỜNG HỢP A. Chủ đề: ${topic}`;
+    } else {
+      let fullText = "";
+      const container = document.getElementById('vstep-fill-input');
+      const children = container.childNodes;
+      children.forEach(child => {
+        if (child.tagName === 'INPUT') {
+          fullText += child.value.trim() ? `[${child.value.trim()}]` : "[___]";
+        } else {
+          fullText += child.innerText;
+        }
+      });
+      userInput = `TRƯỜNG HỢP B. Tôi đã điền mẫu ${mode} như sau: "${fullText}"`;
+    }
+
+    document.getElementById('vstep-submit-btn').style.display = 'none';
+    document.getElementById('vstep-loading').style.display = 'block';
+    document.getElementById('vstep-result').style.display = 'none';
+
+    const prompt = VSTEP_SYSTEM_PROMPT + "\\n\\nINPUT CỦA NGƯỜI DÙNG:\\n" + userInput;
+
+    try {
+      const response = await fetch(\`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=\${geminiApiKey}\`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseMimeType: "application/json"
+          }
+        })
+      });
+
+      const data = await response.json();
+      if (data.error) throw new Error(data.error.message);
+      
+      const jsonText = data.candidates[0].content.parts[0].text;
+      const result = JSON.parse(jsonText);
+      renderVstepResult(result);
+
+    } catch (e) {
+      alert("Lỗi khi gọi AI: " + e.message);
+    } finally {
+      document.getElementById('vstep-submit-btn').style.display = 'block';
+      document.getElementById('vstep-loading').style.display = 'none';
+    }
+  }
+
+  function renderVstepResult(res) {
+    const container = document.getElementById('vstep-result');
+    let html = \`
+      <div style="margin-bottom: 16px;">
+        <span style="background: var(--accent); color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: bold;">Mẫu: \${res.template_used}</span>
+      </div>
+      <h3 style="color: var(--ink); margin-top: 0; font-size: 17px;">Q: \${res.vstep_question}</h3>
+      <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 16px; border-radius: 10px; margin-bottom: 16px;">
+        <p style="margin: 0 0 8px 0; font-weight: 500; font-size: 16px; color: #166534; line-height: 1.6;">\${res.full_answer_en}</p>
+        <button class="btn btn-info" style="padding: 4px 10px; font-size: 12px; margin: 0;" onclick="playAudio('\${res.full_answer_en.replace(/'/g, "\\\\'")}')">🔊 Nghe</button>
+      </div>
+      <p style="color: var(--muted); font-size: 14.5px; margin-bottom: 16px; line-height: 1.5;"><em>Dịch: \${res.full_answer_vi}</em></p>
+    \`;
+
+    if (res.grammar_notes) {
+      html += \`
+        <div style="background: #fffbeb; border: 1px solid #fef08a; padding: 12px; border-radius: 10px; margin-bottom: 16px;">
+          <strong style="color: #854d0e; font-size: 14px;">💡 Nhận xét của AI:</strong>
+          <p style="margin: 6px 0 0 0; font-size: 14.5px; color: #713f12; line-height: 1.5;">\${res.grammar_notes}</p>
+        </div>
+      \`;
+    }
+
+    if (res.suggested_phrases && res.suggested_phrases.length > 0) {
+      html += \`<strong style="font-size: 14px; display: block; margin-bottom: 8px;">📚 Cụm từ hữu ích (Gợi ý thêm vào Từ Vựng):</strong><ul style="padding-left: 20px; margin: 0; font-size: 14.5px; color: var(--ink); line-height: 1.5;">\`;
+      res.suggested_phrases.forEach(p => {
+        html += \`<li style="margin-bottom: 6px;"><strong>\${p.phrase}</strong>: \${p.meaning}</li>\`;
+      });
+      html += \`</ul>\`;
+    }
+
+    container.innerHTML = html;
+    container.style.display = 'block';
+  }
 </script>
 </body>
 </html>
